@@ -1,17 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "exampledb",
-    "host": "localhost",
-    "dialect": "mysql"
+  "use_env_variable": "db_url",
+  "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "testdb",
-    "host": "localhost",
-    "dialect": "mysql",
+    "use_env_variable": "db_url",
     "logging": false
   },
   "production": {
@@ -19,3 +12,4 @@
     "dialect": "mysql"
   }
 }
+
