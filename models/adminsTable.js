@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
     photo: {
       // need to get reference to the file location of the image
       // look at assignment before burgers// WHAT IS THE DATA TYPE?
-      // type: DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notNull: true // won't allow null
       }

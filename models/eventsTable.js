@@ -39,7 +39,8 @@ module.exports = function(sequelize, DataTypes) {
     date: {
       type: DataTypes.DATE, // can also try DATEONLY
       validate: {
-        notNull: true // won't allow null
+        notNull: true, // won't allow null
+        isDate: true // only allow date strings
       }
     },
     addressLine: {
@@ -75,19 +76,27 @@ module.exports = function(sequelize, DataTypes) {
     },
     nextStepPrompt: {
       type: DataTypes.STRING,
-      validate: {}
+      validate: {
+        min: 2
+      }
     },
     question1: {
       type: DataTypes.STRING,
-      validate: {}
+      validate: {
+        min: 2
+      }
     },
     question2: {
       type: DataTypes.STRING,
-      validate: {}
+      validate: {
+        min: 2
+      }
     },
     quesiton3: {
       type: DataTypes.STRING,
-      validate: {}
+      validate: {
+        min: 2
+      }
     },
     foreign_id: {
       type: Sequelize.INTEGER,
