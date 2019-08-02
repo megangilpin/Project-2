@@ -5,10 +5,31 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    firstName: {},
-    lastName: {},
-    email: {},
-    organization: {},
+    firstName: {
+      type: DataTypes.STRING,
+      len: [2, 50],
+      validate: {
+        notNull: true // won't allow null
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      len: [2, 50],
+      validate: {
+        notNull: true // won't allow null
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      len: [2],
+      validate: {
+        isEmail: true, // checks for email format (foo@bar.com)
+        notNull: true // won't allow null
+      }
+    },
+    organization: {
+      type: DataTypes.STRING
+    },
     VIP: {
       type: DataTypes.BOOLEAN
     },
