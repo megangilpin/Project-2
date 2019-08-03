@@ -9,14 +9,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     email: {
@@ -24,21 +24,21 @@ module.exports = function(sequelize, DataTypes) {
       len: [2],
       validate: {
         isEmail: true, // checks for email format (foo@bar.com)
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     username: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     password: {
       type: DataTypes.STRING,
       len: [2],
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     photo: {
@@ -46,39 +46,26 @@ module.exports = function(sequelize, DataTypes) {
       // look at assignment before burgers// WHAT IS THE DATA TYPE?
       type: DataTypes.STRING,
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     company: {
       type: DataTypes.STRING,
       validate: {
-        allowNull: false, // won't allow null
+        allowNull: false,
         min: 2,
         max: 100
       }
     }
-    // foreign_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: Events,
-    //     key: "id",
-    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    //   }
-    // }
   });
+
+  Admins.associate = function(models) {
+    Admins.hasMany(models.Events, {
+      as: "Events",
+      foreignKey: "id",
+      onDelete: "cascade"
+    });
+  };
+
   return Admins;
 };
-
-// id
-// firstName
-// lastName
-// email
-// username
-// password
-// photo
-// company
-// foreignKey(scheduledEvent)
-
-// If you use sequelize transforms, this will remove spaces on both ends
-// of the string also
-// trim: true,
