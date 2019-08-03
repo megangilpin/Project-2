@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Events = sequelize.define("Events", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
@@ -9,50 +9,53 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     description: {
       type: DataTypes.TEXT,
       validate: {
-        notNull: true, // won't allow null
+        allowNull: false, // won't allow null
         min: 2
       }
     },
-    eventType: {
+    eventtype: {
       type: DataTypes.STRING,
-      len: [2, 50]
+      len: [2, 50],
+      validate: {
+        allowNull: true // won't allow null
+      }
       //   no validation here
     },
-    startTime: {
-      type: Sequelize.TIME,
+    starttime: {
+      type: DataTypes.TIME,
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
-    endTime: {
-      type: Sequelize.TIME,
+    end_time: {
+      type: DataTypes.TIME,
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     date: {
       type: DataTypes.DATE, // can also try DATEONLY
       validate: {
-        notNull: true, // won't allow null
+        allowNull: false, // won't allow null
         isDate: true // only allow date strings
       }
     },
-    addressLine: {
+    address_line: {
       type: DataTypes.STRING,
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     city: {
       type: DataTypes.STRING,
       validate: {
-        notNull: true, // won't allow null
+        allowNull: false, // won't allow null
         is: ["^[a-z]+$", "i"] // will only allow letters
       }
     },
@@ -62,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
         is: ["^[a-z]+$", "i"], // will only allow letters
         max: 2, // only allow values <= 2
         min: 2, // only allow values >= 2
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     zipcode: {
@@ -70,11 +73,11 @@ module.exports = function(sequelize, DataTypes) {
       len: [5, 5],
       validate: {
         isInt: true, // checks for valid integers
-        notNull: true, // won't allow null
+        allowNull: false, // won't allow null
         not: ["[a-z]", "i"] // will not allow letters
       }
     },
-    nextStepPrompt: {
+    next_step_prompt: {
       type: DataTypes.STRING,
       validate: {
         min: 2
@@ -92,20 +95,20 @@ module.exports = function(sequelize, DataTypes) {
         min: 2
       }
     },
-    quesiton3: {
+    question3: {
       type: DataTypes.STRING,
       validate: {
         min: 2
       }
-    },
-    foreign_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: Guests, // this will need to be dynamically created -- not sure how to refernece that
-        key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-      }
     }
+    // foreign_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: Guests, // this will need to be dynamically created -- not sure how to refernece that
+    //     key: "id",
+    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+    //   }
+    // }
   });
   return Events;
 };
