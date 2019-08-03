@@ -9,14 +9,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     email: {
@@ -24,21 +24,21 @@ module.exports = function(sequelize, DataTypes) {
       len: [2],
       validate: {
         isEmail: true, // checks for email format (foo@bar.com)
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     username: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     password: {
       type: DataTypes.STRING,
       len: [2],
       validate: {
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     photo: {
@@ -46,13 +46,13 @@ module.exports = function(sequelize, DataTypes) {
       // look at assignment before burgers// WHAT IS THE DATA TYPE?
       type: DataTypes.STRING,
       validate: {
-        allowedNull: false // won't allow null
+        allowNull: false // won't allow null
       }
     },
     company: {
       type: DataTypes.STRING,
       validate: {
-        allowedNull: false, // won't allow null
+        allowNull: false, // won't allow null
         min: 2,
         max: 100
       }
