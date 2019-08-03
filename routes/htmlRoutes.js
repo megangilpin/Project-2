@@ -16,6 +16,15 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/guestlist", function(req, res) {
+    db.Events.findAll({}).then(function(result) {
+      res.render("guestlist", {
+        layout: "portalview",
+        msg: "Your Guestlist",
+        guests: result
+      });
+    });
+  });
   // Load event page and pass in an event by id
   app.get("/event/:id", function(req, res) {
     db.Events.findOne({ where: { id: req.params.id } }).then(function(result) {

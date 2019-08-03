@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // Get references to page elements
 var $eventName = $("#event-name");
 var $eventDescription = $("#event-description");

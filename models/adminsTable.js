@@ -65,12 +65,12 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Admins.associate = function(models) {
-    Admins.hasMany(models.Events, {
-      foreignKey: "id",
-      onDelete: "cascade"
-    });
-  };
+  // Admins.associate = function(models) {
+  //   Admins.hasMany(models.Events, {
+  //     foreignKey: "id",
+  //     onDelete: "cascade"
+  //   });
+  // };
 
   return Admins;
 };
