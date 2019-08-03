@@ -8,24 +8,27 @@ module.exports = function(sequelize, DataTypes) {
     first_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+      //   allowNull: false
+      // }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+      //   allowNull: false
+      // }
     },
     email: {
       type: DataTypes.STRING,
       len: [2],
-      validate: {
-        isEmail: true, // checks for email format (foo@bar.com)
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+      //   isEmail: true, // checks for email format (foo@bar.com)
+
+      // }
     },
     organization: {
       type: DataTypes.STRING
@@ -36,23 +39,15 @@ module.exports = function(sequelize, DataTypes) {
     checked_in: {
       type: DataTypes.BOOLEAN
     }
-    // foreign_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: Events,
-    //     key: "id",
-    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    //   }
-    // }
   });
+
+  Guests.associate = function(models) {
+    Guests.belongsTo(models.Events, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return Guests;
 };
-
-// id
-// firstName	R
-// lastName	R
-// email	R
-// organization
-// VIP -- boolean
-// checkedIn -- boolean
-// foreignKey(scheduledEvent)

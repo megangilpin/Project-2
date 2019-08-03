@@ -8,77 +8,69 @@ module.exports = function(sequelize, DataTypes) {
     first_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+
+      // }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+
+      // }
     },
     email: {
       type: DataTypes.STRING,
       len: [2],
-      validate: {
-        isEmail: true, // checks for email format (foo@bar.com)
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+      //  isEmail: true, // checks for email format (foo@bar.com)
+      // }
     },
     username: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+
+      // }
     },
     password: {
       type: DataTypes.STRING,
       len: [2],
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+
+      // }
     },
     photo: {
       // need to get reference to the file location of the image
       // look at assignment before burgers// WHAT IS THE DATA TYPE?
       type: DataTypes.STRING,
-      validate: {
-        allowNull: false // won't allow null
-      }
+      allowNull: false
+      // validate: {
+
+      // }
     },
     company: {
       type: DataTypes.STRING,
-      validate: {
-        allowNull: false, // won't allow null
-        min: 2,
-        max: 100
-      }
+      allowNull: false
+      // validate: {
+
+      //   min: 2,
+      //   max: 100
+      // }
     }
-    // foreign_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: Events,
-    //     key: "id",
-    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    //   }
-    // }
   });
+
+  Admins.associate = function(models) {
+    Admins.hasMany(models.Events, {
+      foreignKey: "id",
+      onDelete: "cascade"
+    });
+  };
+
   return Admins;
 };
-
-// id
-// firstName
-// lastName
-// email
-// username
-// password
-// photo
-// company
-// foreignKey(scheduledEvent)
-
-// If you use sequelize transforms, this will remove spaces on both ends
-// of the string also
-// trim: true,
