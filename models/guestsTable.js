@@ -8,24 +8,27 @@ module.exports = function(sequelize, DataTypes) {
     first_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false
-      }
+      allowNull: false
+      // validate: {
+      //   allowNull: false
+      // }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
-      validate: {
-        allowNull: false
-      }
+      allowNull: false
+      // validate: {
+      //   allowNull: false
+      // }
     },
     email: {
       type: DataTypes.STRING,
       len: [2],
-      validate: {
-        isEmail: true, // checks for email format (foo@bar.com)
-        allowNull: false
-      }
+      allowNull: false
+      // validate: {
+      //   isEmail: true, // checks for email format (foo@bar.com)
+
+      // }
     },
     organization: {
       type: DataTypes.STRING
