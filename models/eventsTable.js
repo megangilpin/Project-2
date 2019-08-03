@@ -31,21 +31,21 @@ module.exports = function(sequelize, DataTypes) {
       //   no validation here
     },
     start_time: {
-      type: DataTypes.STRING, //TIME
+      type: DataTypes.TIME,
       allowNull: false
       // validate: {
 
       // }
     },
     end_time: {
-      type: DataTypes.STRING, //TIME
+      type: DataTypes.TIME,
       allowNull: false
       // validate: {
 
       // }
     },
     date: {
-      type: DataTypes.STRING, // DATE or can also try DATEONLY
+      type: DataTypes.DATE, // DATE or can also try DATEONLY
       allowNull: false
       // validate: {
       //   isDate: true // only allow date strings
@@ -108,7 +108,9 @@ module.exports = function(sequelize, DataTypes) {
       // validate: {
       //   min: 2
       // }
-    }
+
+    },
+
     // creator: {
     //   type: DataTypes.STRING,
     //   allowNull: false
@@ -119,6 +121,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Events.associate = function(models) {
+
     Events.belongsTo(models.Admins, {
       foreignKey: {
         allowNull: false

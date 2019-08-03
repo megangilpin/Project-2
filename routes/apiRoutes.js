@@ -17,14 +17,20 @@ module.exports = function(app) {
 
   // Update event details.
   app.put("/api/events", function(req, res) {
+    console.log(req);
+    var startTime = req.data.start_time;
+    var endTime = req.data.end_time;
+    var date = req.data.date;
+
     db.Events.update(
       {
         name: req.body.name,
         description: req.body.description,
-        eventType: req.body.eventType,
-        startTime: req.body.startTime,
-        endTime: req.body.endTime,
-        addressLine: req.body.addressLine,
+        event_type: req.body.event_type,
+        start_time: startTime,
+        end_time: endTime,
+        date: date,
+        address_line: req.body.address_line,
         city: req.body.city,
         state: req.body.state,
         zipcode: req.body.zipcode,

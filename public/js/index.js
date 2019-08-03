@@ -4,6 +4,7 @@ var $eventDescription = $("#event-description");
 var $eventType = $("#event-type");
 var $startTime = $("#start-time");
 var $endTime = $("#end-time");
+var $date = $("#date");
 var $addressLine = $("#event-address");
 var $eventCity = $("#event-city");
 var $eventState = $("#event-state");
@@ -42,7 +43,7 @@ var API = {
 
 // refreshEvents gets new events from the db and repopulates the list
 var refreshEvents = function() {
-  API.getEvents().then(function(data) {
+  API.getEvent().then(function(data) {
     var $events = data.map(function(event) {
       var $a = $("<a>")
         .text(event.text)
@@ -77,10 +78,11 @@ var handleFormSubmit = function(event) {
   var event = {
     name: $eventName.val().trim(),
     description: $eventDescription.val().trim(),
-    eventType: $eventType.val().trim(),
-    startTime: $startTime.val().trim(),
-    endTime: $endTime.val().trim(),
-    addressLine: $addressLine.val().trim(),
+    event_type: $eventType.val().trim(),
+    start_time: $startTime.val().trim(),
+    end_time: $endTime.val().trim(),
+    date: $date.val().trim(),
+    address_line: $addressLine.val().trim(),
     city: $eventCity.val().trim(),
     state: $eventState.val().trim(),
     zipcode: $eventZipcode.val().trim(),
@@ -93,8 +95,9 @@ var handleFormSubmit = function(event) {
     alert("You must enter event details!");
     return;
   }
+  console.log(JSON.stringify(event));
 
-  API.saveEvents(event).then(function() {
+  API.saveEvent(event).then(function() {
     refreshEvents();
   });
 
@@ -103,11 +106,13 @@ var handleFormSubmit = function(event) {
   $eventType.val("");
   $startTime.val("");
   $endTime.val("");
+  $date.val("");
   $addressLine.val("");
   $eventCity.val("");
   $eventState.val("");
   $eventZipcode.val("");
   $questionOne.val("");
+  $questionTwo.val("");
   $questionThree.val("");
 };
 
