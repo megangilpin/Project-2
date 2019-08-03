@@ -9,53 +9,53 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     description: {
       type: DataTypes.TEXT,
       validate: {
-        allowNull: false, // won't allow null
+        allowNull: false,
         min: 2
       }
     },
-    eventtype: {
+    event_type: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        allowNull: true // won't allow null
+        allowNull: true
       }
       //   no validation here
     },
-    starttime: {
+    start_time: {
       type: DataTypes.TIME,
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     end_time: {
       type: DataTypes.TIME,
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     date: {
       type: DataTypes.DATE, // can also try DATEONLY
       validate: {
-        allowNull: false, // won't allow null
+        allowNull: false,
         isDate: true // only allow date strings
       }
     },
     address_line: {
       type: DataTypes.STRING,
       validate: {
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     city: {
       type: DataTypes.STRING,
       validate: {
-        allowNull: false, // won't allow null
+        allowNull: false,
         is: ["^[a-z]+$", "i"] // will only allow letters
       }
     },
@@ -65,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
         is: ["^[a-z]+$", "i"], // will only allow letters
         max: 2, // only allow values <= 2
         min: 2, // only allow values >= 2
-        allowNull: false // won't allow null
+        allowNull: false
       }
     },
     zipcode: {
@@ -73,7 +73,7 @@ module.exports = function(sequelize, DataTypes) {
       len: [5, 5],
       validate: {
         isInt: true, // checks for valid integers
-        allowNull: false, // won't allow null
+        allowNull: false,
         not: ["[a-z]", "i"] // will not allow letters
       }
     },
@@ -100,32 +100,30 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         min: 2
       }
+    },
+    creator: {
+      type: DataTypes.STRING,
+      validate: {
+        allowNull: false
+      }
     }
-    // foreign_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: Guests, // this will need to be dynamically created -- not sure how to refernece that
-    //     key: "id",
-    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    //   }
-    // }
   });
+
+  Events.associate = function(models) {
+    Events.belongsTo(models.Admins, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
+  Events.associate = function(models) {
+    Events.hasMany(models.Guests, {
+      as: "Guests",
+      foreignKey: "id",
+      onDelete: "cascade"
+    });
+  };
+
   return Events;
 };
-
-// id
-// name	R
-// description	R
-// eventType
-// startTime	R
-// endTime	R
-// date	R
-// addressLine	R
-// city	R
-// state	R
-// zipcode	R
-// nextStepPrompt
-// question1
-// question2
-// question3
-// foreignKey(guestList)
