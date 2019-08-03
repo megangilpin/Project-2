@@ -65,7 +65,6 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // COMMENTED OUT UNTIL THE ADMIN PAGE IS WORKING
   // Admins.associate = function(models) {
   //   Admins.hasMany(models.Events, {
   //     foreignKey: "id",
