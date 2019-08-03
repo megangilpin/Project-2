@@ -23,21 +23,19 @@
                 placeholder="Enter Event Type">
             </div>
             {{!-- Start Time--}}
-            <div>
-              <label for="example-text">Start Time</label>
-              <input type="text" id="start-time" class="form-control" aria-describedby="example-text"
-                placeholder="Enter Start Time Type">
+            <div class="md-form mx-5 my-5">
+              <input type="time" id="start-time" class="form-control">
+              <label for="inputMDEx1">Start Time</label>
             </div>
             {{!-- End Time--}}
-            <div>
-              <label for="example-text">End Time</label>
-              <input type="text" id="end-time" class="form-control" aria-describedby="example-text"
-                placeholder="Enter End Time Type">
+            <div class="md-form mx-5 my-5">
+              <input type="time" id="end-time" class="form-control">
+              <label for="inputMDEx1">End Time</label>
             </div>
             {{!-- Date --}}
             <div>
               <label for="example-text">Date</label>
-              <input type="text" id="date" class="form-control" aria-describedby="example-text"
+              <input type="date" id="date" class="form-control" aria-describedby="example-text"
                 placeholder="Enter Date">
             </div>
             {{!-- Event Address--}}
@@ -65,6 +63,16 @@
               <textarea class="form-control" id="question-one" aria-describedby="example-description"
                 placeholder="Enter Attendee question"></textarea>
             </div>
+            <div>
+              <label for="example-description">Question for Attendee</label>
+              <textarea class="form-control" id="question-two" aria-describedby="example-description"
+                placeholder="Enter Attendee question"></textarea>
+            </div>
+            <div>
+              <label for="example-description">Question for Attendee</label>
+              <textarea class="form-control" id="question-three" aria-describedby="example-description"
+                placeholder="Enter Attendee question"></textarea>
+            </div>
   
             <button id="submit" class="btn btn-primary float-right">Submit Event</button>
           </div>
@@ -75,7 +83,7 @@
         <ul id="event-list" class="list-group">
           {{#each events}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
+            <a href="event/{{this.id}}">{{this.name}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}

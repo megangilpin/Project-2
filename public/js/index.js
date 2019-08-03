@@ -43,7 +43,7 @@ var API = {
 
 // refreshEvents gets new events from the db and repopulates the list
 var refreshEvents = function() {
-  API.getEvents().then(function(data) {
+  API.getEvent().then(function(data) {
     var $events = data.map(function(event) {
       var $a = $("<a>")
         .text(event.text)

@@ -31,21 +31,21 @@ module.exports = function(sequelize, DataTypes) {
       //   no validation here
     },
     start_time: {
-      type: DataTypes.STRING, //TIME
+      type: DataTypes.TIME,
       allowNull: false
       // validate: {
 
       // }
     },
     end_time: {
-      type: DataTypes.STRING, //TIME
+      type: DataTypes.TIME,
       allowNull: false
       // validate: {
 
       // }
     },
     date: {
-      type: DataTypes.STRING, // DATE or can also try DATEONLY
+      type: DataTypes.DATE, // DATE or can also try DATEONLY
       allowNull: false
       // validate: {
       //   isDate: true // only allow date strings
