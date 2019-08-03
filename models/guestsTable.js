@@ -27,7 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
       // validate: {
       //   isEmail: true, // checks for email format (foo@bar.com)
-
       // }
     },
     organization: {
