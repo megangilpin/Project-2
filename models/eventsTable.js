@@ -119,7 +119,6 @@ module.exports = function(sequelize, DataTypes) {
 
   Events.associate = function(models) {
     Events.hasMany(models.Guests, {
-      as: "Guests",
       foreignKey: "id",
       onDelete: "cascade"
     });

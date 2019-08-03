@@ -61,7 +61,6 @@ module.exports = function(sequelize, DataTypes) {
 
   Admins.associate = function(models) {
     Admins.hasMany(models.Events, {
-      as: "Events",
       foreignKey: "id",
       onDelete: "cascade"
     });
