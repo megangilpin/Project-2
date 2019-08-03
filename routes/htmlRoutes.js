@@ -9,7 +9,8 @@ module.exports = function(app) {
   app.get("/portal", function(req, res) {
     db.Events.findAll({}).then(function(result) {
       res.render("portal", {
-        msg: "Welcome, Megan!",
+        layout: "portalview",
+        msg: "Welcome!",
         events: result
       });
     });
