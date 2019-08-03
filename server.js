@@ -2,6 +2,10 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+// added this for mailgun testing - leave this hear for now (signed, Emily)
+var sendmail = require("./public/js/sendmail");
+sendmail();
+
 var db = require("./models");
 
 var app = express();
