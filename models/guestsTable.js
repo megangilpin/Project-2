@@ -1,22 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
   var Guests = sequelize.define("Guests", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    firstName: {
+    first_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
-    lastName: {
+    last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       validate: {
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     email: {
@@ -24,26 +24,26 @@ module.exports = function(sequelize, DataTypes) {
       len: [2],
       validate: {
         isEmail: true, // checks for email format (foo@bar.com)
-        notNull: true // won't allow null
+        allowNull: false // won't allow null
       }
     },
     organization: {
       type: DataTypes.STRING
     },
-    VIP: {
+    vip: {
       type: DataTypes.BOOLEAN
     },
-    checkedIn: {
+    checked_in: {
       type: DataTypes.BOOLEAN
-    },
-    foreign_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: Events,
-        key: "id",
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-      }
     }
+    // foreign_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: Events,
+    //     key: "id",
+    //     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+    //   }
+    // }
   });
   return Guests;
 };
