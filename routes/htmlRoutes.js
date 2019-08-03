@@ -3,19 +3,23 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Events.findAll({}).then(function(dbEvent) {
-      res.render("index", {
-        msg: "Welcome!",
-        events: dbEvent
+    res.render("index");
+  });
+
+  app.get("/portal", function(req, res) {
+    db.Events.findAll({}).then(function(result) {
+      res.render("portal", {
+        msg: "Welcome, Megan!",
+        events: result
       });
     });
   });
 
   // Load event page and pass in an event by id
-  app.get("/events/:id", function(req, res) {
-    db.Events.findOne({ where: { id: req.params.id } }).then(function(dbEvent) {
+  app.get("/event/:id", function(req, res) {
+    db.Events.findOne({ where: { id: req.params.id } }).then(function(result) {
       res.render("event", {
-        event: dbEvent
+        event: result
       });
     });
   });

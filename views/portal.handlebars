@@ -3,21 +3,77 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
+        <h2>Add event</h2>
         <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+          <div class="form-group-event">
+            {{!-- Event Name Input--}}
+            <div>
+              <label for="example-text">Event Name</label>
+              <input type="text" id="event-name" class="form-control" aria-describedby="example-text" placeholder="Enter Event name">
+            </div>
+            {{!-- Event Description Input --}}
+            <div>
+              <label for="example-description">Event Description</label>
+              <textarea class="form-control" id="event-description" aria-describedby="example-description" placeholder="Enter Event Description"></textarea>
+            </div>
+            {{!-- Event Type Input--}}
+            <div>
+              <label for="example-text">Event Type</label>
+              <input type="text" id="event-type" class="form-control" aria-describedby="example-text"
+                placeholder="Enter Event Type">
+            </div>
+            {{!-- Start Time--}}
+            <div>
+              <label for="example-text">Start Time</label>
+              <input type="text" id="start-time" class="form-control" aria-describedby="example-text"
+                placeholder="Enter Start Time Type">
+            </div>
+            {{!-- End Time--}}
+            <div>
+              <label for="example-text">End Time</label>
+              <input type="text" id="end-time" class="form-control" aria-describedby="example-text"
+                placeholder="Enter End Time Type">
+            </div>
+            {{!-- Date --}}
+            <div>
+              <label for="example-text">Date</label>
+              <input type="text" id="date" class="form-control" aria-describedby="example-text"
+                placeholder="Enter Date">
+            </div>
+            {{!-- Event Address--}}
+            <div>
+              <label for="inputAddress">Event Address</label>
+              <input type="text" class="form-control" id="event-address" placeholder="1234 Main St">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" id="event-city">
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputState">State</label>
+                <input type="text" class="form-control" id="event-state">
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputZip">Zip Code</label>
+                <input type="text" class="form-control" id="event-zipcode">
+              </div>
+            </div>
+            {{!-- Questions you may want to ask your attendee Input --}}
+            <div>
+              <label for="example-description">Question for Attendee</label>
+              <textarea class="form-control" id="question-one" aria-describedby="example-description"
+                placeholder="Enter Attendee question"></textarea>
+            </div>
+  
+            <button id="submit" class="btn btn-primary float-right">Submit Event</button>
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
+
+        {{!-- list of User's Events --}}
+        <h3>Your Events:</h3>
+        <ul id="event-list" class="list-group">
+          {{#each events}}
           <li data-id="{{this.id}}" class="list-group-item">
             <a href="example/{{this.id}}">{{this.text}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
