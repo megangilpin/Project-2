@@ -1,63 +1,60 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>Add Guest</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group-event">
-            {{!-- Event Name Input--}}
-            <div>
-              <label for="example-text">Guest First Name</label>
-              <input type="text" id="guest-firstname" class="form-control" aria-describedby="example-text" placeholder="Enter First Name">
-            </div>
 
-            <div>
-              <label for="example-text">Guest Last Name</label>
-              <input type="text" id="guest-lastname" class="form-control" aria-describedby="example-text" placeholder="Enter Last Name">
-            </div>
-            {{!-- Event Description Input --}}
-            <div>
-              <label for="guest-email">Guest Email</label>
-              <textarea class="form-control" id="guest-email" aria-describedby="example-description" placeholder="Enter Guest Email"></textarea>
-            </div>
-            {{!-- Event Type Input--}}
-            <div>
-              <label for="example-text">Guest's Organization</label>
-              <input type="text" id="guest-org" class="form-control" aria-describedby="example-text"
-                placeholder="Enter Guest's Organization">
-            </div>
+<div class="guestview">
 
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">VIP</label>
+  <!-- Add Guest form -->
+    <section class="add-guest">
+        <div class="container">
+        <div class="guest-content">
+            <div class="addguest-form">
+            <h2 class="form-title">Add a Guest</h2>
+            <form method="POST" class="register-form" id="register-form">
+
+                <div class="form-group">
+                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    <input type="text" name="name" id="name" placeholder="Guest First Name" />
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">Checked In</label>
+                <div class="form-group">
+                    <label for="name"><i class="zmdi zmdi-account-o material-icons-name"></i></label>
+                    <input type="text" name="name" id="name" placeholder="Guest Last Name" />
                 </div>
+                <div class="form-group">
+                    <label for="email"><i class="zmdi zmdi-email"></i></label>
+                    <input type="email" name="email" id="email" placeholder="Guest Email" />
+                </div>
+                <div class="form-group">
+                    <label for="name"><i class="zmdi zmdi-city material-icons-name"></i></label>
+                    <input type="text" name="name" id="guest-org" placeholder="Guest's Organization" />
+                </div>
+                <div class="form-group">
+                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                <label for="remember-me" class="label-agree-term"><span><span></span></span>VIP</label>
+                </div>
+
+                <div class="form-button">
+                    <input type="submit" name="addguest" id="add-guest" class="form-submit" value="Add Guest" />
+                </div>
+            </form>
             </div>
 
-  
-            <button id="submit" class="btn btn-primary float-right">Add New Guest</button>
-          </div>
-        </form>
+        </div>
+        </div>
+    </section>
 
-        {{!-- list of User's Events --}}
-        <h3>Your Guests:</h3>
-        <ul id="event-list" class="list-group">
-          {{#each guests}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="guests/{{this.id}}">{{this.name}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
+    <section class="guest-list">
+        <div class="guestlist-container">
+        <div class="guest-content">
+            <div class="guestlist-form">
+            <h2 class="form-title">Your Guestlist</h2>
+
+                <ul id="guest-list" class="list-group">
+                    {{#each guests}}
+                        <li data-id="{{this.id}}" class="list-group-item">
+                            <a href="guests/{{this.id}}">{{this.name}}</a>
+                        <button class="btn btn-danger float-right delete">ｘ</button>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            </div>
+    </section>
 </div>

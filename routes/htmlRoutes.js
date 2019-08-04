@@ -19,7 +19,7 @@ module.exports = function(app) {
   app.get("/guestlist", function(req, res) {
     db.Events.findAll({}).then(function(result) {
       res.render("guestlist", {
-        layout: "portalview",
+        layout: "guestview",
         msg: "Your Guestlist",
         guests: result
       });
