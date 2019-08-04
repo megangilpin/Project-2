@@ -16,10 +16,10 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/guestlist", function(req, res) {
+  app.get("/guests", function(req, res) {
     db.Events.findAll({}).then(function(result) {
-      res.render("guestlist", {
-        layout: "guestview",
+      res.render("guests", {
+        layout: "guestsview",
         msg: "Your Guestlist",
         guests: result
       });
