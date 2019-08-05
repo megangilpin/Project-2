@@ -15,6 +15,11 @@ var $questionTwo = $("#question-two");
 var $questionThree = $("#question-three");
 var $submitBtn = $("#submit");
 var $eventList = $("#event-list");
+var $signup = $("#signup");
+var $newUserName = $("#newUserName");
+var $newUserEmail = $("#newUserEmail");
+var $newUserPass = $("#newUserPass");
+var $reNewUserPass = $("#reNewUserPass");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -38,6 +43,16 @@ var API = {
     return $.ajax({
       url: "api/events/" + id,
       type: "DELETE"
+    });
+  },
+  addUser: function(user) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/user",
+      data: JSON.stringify(user)
     });
   }
 };
@@ -117,6 +132,33 @@ var handleFormSubmit = function(event) {
   $questionThree.val("");
 };
 
+// Adds new user
+var addNewUserSubmit = function(user) {
+  event.preventDefault();
+
+  var user = {
+    name: $newUserName.val().trim(),
+    email: $newUserEmail.val().trim(),
+    password: $newUserPass.val().trim(),
+    re_password: $reNewUserPass.val().trim()
+  };
+  console.log(user);
+  if (user.password !== user.re_password) {
+    alert("Your passwords don't match, please try again");
+    return;
+  }
+  console.log(JSON.stringify(user));
+
+  API.addUser(user).then(function () {
+    alert("Congrats! You have registered, now lets plan that even!");
+  });
+
+  $newUserName.val("");
+  $newUserEmail.val("");
+  $newUserPass.val("");
+  $reNewUserPass.val("");
+};
+
 // handleDeleteBtnClick is called when an event's delete button is clicked
 // Remove the event detail from the db and refresh the list
 var handleDeleteBtnClick = function() {
@@ -131,4 +173,5 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
+$signup.on("click", addNewUserSubmit);
 $eventList.on("click", ".delete", handleDeleteBtnClick);

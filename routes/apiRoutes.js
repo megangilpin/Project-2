@@ -10,13 +10,15 @@ module.exports = function(app) {
 
   // Create a new event
   app.post("/api/events", function(req, res) {
-    db.Events.create(req.body).then(function(dbEvent) {
-      res.json(dbEvent);
+    console.log("event added");
+    db.Events.create(req.body).then(function(req) {
+      res.json(req);
     });
   });
 
   // Update event details.
   app.put("/api/events", function(req, res) {
+    console.log("event updated");
     console.log(req);
     var startTime = req.data.start_time;
     var endTime = req.data.end_time;

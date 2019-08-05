@@ -27,6 +27,7 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/apiRoutes")(app);
+require("./routes/user-apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 // have set this to TRUE so that the Sequelize will run during development (need to change back to FALSE later)
