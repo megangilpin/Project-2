@@ -7,39 +7,42 @@
         <form class="clearfix mb-4" action="POST">
           <div class="form-group-event">
             {{!-- Event Name Input--}}
-            <div>
+            <div class="form-group">
               <label for="example-text">Event Name</label>
               <input type="text" id="event-name" class="form-control" aria-describedby="example-text" placeholder="Enter Event name">
             </div>
             {{!-- Event Description Input --}}
-            <div>
+            <div class="form-group">
               <label for="example-description">Event Description</label>
               <textarea class="form-control" id="event-description" aria-describedby="example-description" placeholder="Enter Event Description"></textarea>
             </div>
             {{!-- Event Type Input--}}
-            <div>
+            <div class="form-group">
               <label for="example-text">Event Type</label>
               <input type="text" id="event-type" class="form-control" aria-describedby="example-text"
                 placeholder="Enter Event Type">
             </div>
+            {{!-- Event time/date row --}}
+            <div class="form-row">
             {{!-- Start Time--}}
-            <div>
-              <label for="inputMDEx1">Start Time</label>
-              <input type="time" id="start-time" class="form-control">
+              <div class="form-group col-md-2">
+                <label for="inputMDEx1">Start Time</label>
+                <input type="time" id="start-time" class="form-control">
+              </div>
+              {{!-- End Time--}}
+              <div class="form-group col-md-2">
+                <label for="inputMDEx1">End Time</label>
+                <input type="time" id="end-time" class="form-control">
+              </div>
+              {{!-- Date --}}
+              <div class="form-group">
+                <label for="example-text">Date</label>
+                <input type="date" id="date" class="form-control" aria-describedby="example-text" placeholder="Enter Date">
+              </div>
             </div>
-            {{!-- End Time--}}
-            <div>
-              <label for="inputMDEx1">End Time</label>
-              <input type="time" id="end-time" class="form-control">
-            </div>
-            {{!-- Date --}}
-            <div>
-              <label for="example-text">Date</label>
-              <input type="date" id="date" class="form-control" aria-describedby="example-text"
-                placeholder="Enter Date">
-            </div>
+
             {{!-- Event Address--}}
-            <div>
+            <div class="form-group">
               <label for="inputAddress">Event Address</label>
               <input type="text" class="form-control" id="event-address" placeholder="1234 Main St">
             </div>
@@ -58,17 +61,17 @@
               </div>
             </div>
             {{!-- Questions you may want to ask your attendee Input --}}
-            <div>
+            <div class="form-group">
               <label for="example-description">Question for Attendee</label>
               <textarea class="form-control" id="question-one" aria-describedby="example-description"
                 placeholder="Enter Attendee question"></textarea>
             </div>
-            <div>
+            <div class="form-group">
               <label for="example-description">Question for Attendee</label>
               <textarea class="form-control" id="question-two" aria-describedby="example-description"
                 placeholder="Enter Attendee question"></textarea>
             </div>
-            <div>
+            <div class="form-group">
               <label for="example-description">Question for Attendee</label>
               <textarea class="form-control" id="question-three" aria-describedby="example-description"
                 placeholder="Enter Attendee question"></textarea>
