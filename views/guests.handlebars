@@ -32,6 +32,10 @@
                 <div class="form-button">
                     <input type="submit" name="addguest" id="add-guest" class="form-submit" value="Add Guest" />
                 </div>
+
+                {{!-- triggers adding people to the DOM in the guest list and sends email --}}
+                <button id="submit-guest" class="btn btn-primary">Submit Guest</button>
+
             </form>
             </div>
 
@@ -44,15 +48,16 @@
             <div class="guest-content">
                 <div class="guestlist-form">
                     <h2 class="form-title">Your Guestlist</h2>
-
+                    
                     <ul id="guest-list" class="list-group">
                         {{#each guests}}
                             <li data-id="{{this.id}}" class="list-group-item">
-                                <a href="guest/{{this.id}}">{{this.name}}</a>
+                                <a href="guest/{{this.id}}">{{this.name}}</a>{{status}}
                             <button class="btn btn-danger float-right delete">ｘ</button>
                             </li>
                         {{/each}}
                     </ul>
+
                 </div>
             </div>
     </section>

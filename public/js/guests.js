@@ -4,7 +4,7 @@ var $guestLastName = $("#guest-last-name");
 var $guestEmail = $("#guest-email");
 var $guestOrg = $("#guest-org");
 var $guestVIP = $("#guest-vip");
-var $submitBtn = $("#submit");
+var $submitBtn = $("#submit-guest");
 var $guestList = $("guest-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -29,6 +29,12 @@ var API = {
     return $.ajax({
       type: "DELETE",
       url: "api/guest/" + id
+    });
+  },
+  sendGuestEmail: function(email) {
+    return $.ajax({
+      type: "POST",
+      url: "api/submit/" + email
     });
   }
 };
@@ -80,6 +86,10 @@ var handleFormSubmit = function(guest) {
     return;
   }
   console.log(JSON.stringify(guest, null, 2));
+
+  // TRIGGERs MAILGUN TO SEND EMAIL
+  API.sendGuestEmail(guest.email);
+  // --------------------------------
 
   API.saveGuest(guest).then(function() {
     refreshGuests();
