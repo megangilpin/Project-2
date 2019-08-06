@@ -17,6 +17,18 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/guestlist", function(req, res) {
+    res.render("guestlist", {
+      layout: "view"
+    });
+  });
+
+  app.get("/events", function (req, res) {
+    res.render("events", {
+      layout: "view"
+    });
+  });
+
   app.get("/guests", function(req, res) {
     db.Events.findAll({}).then(function(result) {
       res.render("guests", {
@@ -26,6 +38,7 @@ module.exports = function(app) {
       });
     });
   });
+
   // Load event page and pass in an event by id
   app.get("/event/:id", function(req, res) {
     db.Events.findOne({ where: { id: req.params.id } }).then(function(result) {
