@@ -119,13 +119,13 @@ module.exports = function(sequelize, DataTypes) {
     // }
   });
 
-  Events.associate = function(models) {
-    Events.belongsTo(models.Admins, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Events.associate = function(models) {
+  //   Events.belongsTo(models.Admins, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   // Events.associate = function(models) {
   //   Events.hasMany(models.Guests, {
