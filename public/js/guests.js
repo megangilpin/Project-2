@@ -3,7 +3,7 @@ var $guestFirstName = $("#guest-first-name");
 var $guestLastName = $("#guest-last-name");
 var $guestEmail = $("#guest-email");
 var $guestOrg = $("#guest-org");
-var $guestVIP = $("#guest-vip");
+// var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("guest-list");
 
@@ -14,7 +14,7 @@ var API = {
     return $.ajax({
       type: "POST",
       url: "api/guests/add",
-      data: JSON.stringify(guest)
+      data: guest
     });
   },
   getGuest: function() {
@@ -75,8 +75,8 @@ var handleFormSubmit = function(guest) {
     first_name: $guestFirstName.val().trim(),
     last_name: $guestLastName.val().trim(),
     email: $guestEmail.val().trim(),
-    org: $guestOrg.val().trim(),
-    vip: $guestVIP.val().trim()
+    org: $guestOrg.val().trim()
+    // vip: $guestVIP.val().trim()
   };
 
   if (!guest.email) {
@@ -97,7 +97,7 @@ var handleFormSubmit = function(guest) {
   $guestLastName.val("");
   $guestEmail.val("");
   $guestOrg.val("");
-  $guestVIP.val("");
+  //   $guestVIP.val("");
 };
 
 // handleDeleteBtnClick is called when an guest's delete button is clicked

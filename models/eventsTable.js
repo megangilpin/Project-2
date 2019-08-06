@@ -108,8 +108,7 @@ module.exports = function(sequelize, DataTypes) {
       // validate: {
       //   min: 2
       // }
-
-    },
+    }
 
     // creator: {
     //   type: DataTypes.STRING,
@@ -121,7 +120,6 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Events.associate = function(models) {
-
     Events.belongsTo(models.Admins, {
       foreignKey: {
         allowNull: false
@@ -129,12 +127,12 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
-  Events.associate = function(models) {
-    Events.hasMany(models.Guests, {
-      foreignKey: "id",
-      onDelete: "cascade"
-    });
-  };
+  // Events.associate = function(models) {
+  //   Events.hasMany(models.Guests, {
+  //     foreignKey: "id",
+  //     onDelete: "cascade"
+  //   });
+  // };
 
   return Events;
 };
