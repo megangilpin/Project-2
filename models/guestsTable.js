@@ -9,17 +9,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       allowNull: false
-      // validate: {
-      //   allowNull: false
-      // }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       allowNull: false
-      // validate: {
-      //   allowNull: false
-      // }
     },
     email: {
       type: DataTypes.STRING,
@@ -40,13 +34,13 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Guests.associate = function(models) {
-    Guests.belongsTo(models.Events, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Guests.associate = function(models) {
+  //   Guests.belongsTo(models.Events, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   return Guests;
 };

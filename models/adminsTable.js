@@ -9,17 +9,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       allowNull: false
-      // validate: {
-
-      // }
     },
     last_name: {
       type: DataTypes.STRING,
       len: [2, 50],
       allowNull: false
-      // validate: {
-
-      // }
     },
     email: {
       type: DataTypes.STRING,
@@ -33,26 +27,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       len: [2, 50],
       allowNull: false
-      // validate: {
-
-      // }
     },
     password: {
       type: DataTypes.STRING,
       len: [2],
       allowNull: false
-      // validate: {
-
-      // }
     },
     photo: {
       // need to get reference to the file location of the image
       // look at assignment before burgers// WHAT IS THE DATA TYPE?
       type: DataTypes.STRING,
       allowNull: false
-      // validate: {
-
-      // }
     },
     company: {
       type: DataTypes.STRING,
