@@ -9,8 +9,10 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/guests", function(req, res) {
+  app.post("/api/guests/add", function(req, res) {
+    console.log("---dbGuest on guest-apiRoute");
     db.Guests.create(req.body).then(function(dbGuest) {
+      console.log(dbGuest);
       res.json(dbGuest);
     });
   });

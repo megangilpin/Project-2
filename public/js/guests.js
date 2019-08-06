@@ -10,12 +10,10 @@ var $guestList = $("guest-list");
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveGuest: function(guest) {
+    console.log(guest);
     return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
       type: "POST",
-      url: "api/guests",
+      url: "api/guests/add",
       data: JSON.stringify(guest)
     });
   },
@@ -88,10 +86,10 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  API.sendGuestEmail(guest.email);
+  //   API.sendGuestEmail(guest.email);
   // --------------------------------
-
   API.saveGuest(guest).then(function() {
+    console.log("guest added");
     refreshGuests();
   });
 
