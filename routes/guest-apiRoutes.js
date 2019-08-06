@@ -1,5 +1,4 @@
 // fill this in with the route to access the guests names for events
-"use strict";
 var db = require("../models");
 
 module.exports = function(app) {
@@ -9,6 +8,7 @@ module.exports = function(app) {
     });
   });
 
+  // working
   app.post("/api/guests/add", function(req, res) {
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
@@ -36,25 +36,27 @@ module.exports = function(app) {
     var lastName = req.body.last_name;
     var email = req.body.email;
     var org = req.body.organization;
-    // var vip = req.body.vip;
-    // checked_in will be happening on a differnet api call
+    var vip = req.body.vip;
+    var checked_in = req.body.checked_in;
+    // will be happening on a differnet api call
 
-    db.Guests.update(
-      {
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        organization: org
+      .db.Guests.update(
+        {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          organization: org
         // vip: vip
-      },
-      {
-        wjere: {
-          id: req.body.id
+        },
+        {
+          wjere: {
+            id: req.body.id
+          }
         }
-      }
-    ).then(function(dbGuest) {
-      res.json(dbGuest);
-    });
+      )
+      .then(function(dbGuest) {
+          res.json(dbGuest);
+        });
   });
 
   //   CHECK IN PROCESS -----------------------

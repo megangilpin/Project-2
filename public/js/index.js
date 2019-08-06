@@ -62,7 +62,7 @@ var refreshEvents = function() {
   API.getEvent().then(function(data) {
     var $events = data.map(function(event) {
       var $a = $("<a>")
-        .text(event.text)
+        .text(event.name)
         .attr("href", "/event/" + event.id);
 
       var $li = $("<li>")
@@ -149,7 +149,7 @@ var addNewUserSubmit = function(user) {
   }
   console.log(JSON.stringify(user));
 
-  API.addUser(user).then(function () {
+  API.addUser(user).then(function() {
     alert("Congrats! You have registered, now lets plan that even!");
   });
 

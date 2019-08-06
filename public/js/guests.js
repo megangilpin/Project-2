@@ -37,6 +37,7 @@ var API = {
   }
 };
 
+// UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
     var $guests = data.map(function(guest) {
