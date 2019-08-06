@@ -8,7 +8,7 @@
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
     "test": "npm run lint",
-    "test2": "&& cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    "test2": "cross-env NODE_ENV=test mocha -u bdd --reporter spec --exit"
   },
   "license": "ISC",
   "dependencies": {
