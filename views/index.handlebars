@@ -1,88 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>
-        label {
-            position: absolute !important;
-            left: 0;
-            top: 10% !important;
-            color: #222;
-        }
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Event Planning App</title>
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="../fonts/material-icon/css/material-design-iconic-font.min.css">
+<div class="main">
 
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-<section class="sign-in" style="padding-top: 50px;">
+  <!-- Sign up form -->
+  <section class="signup">
     <div class="container">
-        <div class="signin-content">
-            <div class="signin-image">
-                <figure><img src="images/signin.jpg" alt="sing up image" style="width: 80%;"></figure>
-                <a href="/register" class="signup-image-link">Create an account</a>
-            </div>
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Sign up</h2>
+          <form method="POST" class="register-form" id="register-form">
 
-            <div class="signin-form">
-                <h2 class="form-title">Sign In</h2>
-                <form method="POST" class="register-form" id="login-form">
-                    <div class="form-group">
-                        <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" name="your_name" id="your_name" placeholder="Your Name" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                        <input type="password" name="your_pass" id="your_pass" placeholder="Password" required/>
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                    </div>
-                    <div class="form-group form-button">
-                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
-                    </div>
-                </form>
-                <div class="social-login">
-                    <span class="social-label">Or login with</span>
-                    <ul class="socials">
-                        <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                        <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                        <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+              <div class="form-group">
+                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <input type="text" name="name" id="newUserName" placeholder="Your Name" />
+              </div>
+              <div class="form-group">
+                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                <input type="email" name="email" id="newUserEmail" placeholder="Your Email" />
+              </div>
+              <div class="form-group">
+                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                <input type="password" name="pass" id="newUserPass" placeholder="Password" />
+              </div>
+              <div class="form-group">
+                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                <input type="password" name="re_pass" id="reNewUserPass" placeholder="Repeat your password" />
+              </div>
+              <div class="form-button">
+                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+              </div>
+
+          </form>
         </div>
+        <div class="signup-image">
+          <figure><img src="https://vignette.wikia.nocookie.net/nickelodeon/images/0/02/SpongeBob_in_2018.png/revision/latest?cb=20190607225227" alt="sign up image"></figure>
+          <a href="#" class="signup-image-link">placeholder for Admin login modal</a>
+          <a href="/portal">Take me to portal</a>
+          <a href="/guests">My Guestlist</a>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+  <section class="sign-in" style="padding-top: 50px;">
+    <div class="container">
+      <div class="signin-content">
+        <div class="signin-image">
+          <figure><img src="images/signin.jpg" alt="sing up image" style="width: 80%;"></figure>
+          <a href="/register" class="signup-image-link">Create an account</a>
+        </div>
+  
+        <div class="signin-form">
+          <h2 class="form-title">Sign In</h2>
+          <form method="POST" class="register-form" id="login-form">
+            <div class="form-group">
+              <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+              <input type="text" name="your_name" id="your_name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+              <input type="password" name="your_pass" id="your_pass" placeholder="Password" required />
+            </div>
+            <div class="form-group">
+              <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+              <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+            </div>
+            <div class="form-group form-button">
+              <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <script>
-  $(document).ready(function() {
-    $('#login-form').on('submit', function(event) {
-        event.preventDefault(); // or return false, your choice
-        $.ajax({
-            url: "/eventpage",
-            type: 'post',
-            data: {name:$("#your_name").val(), pass:$("#your_pass").val()},
-            success: function(data, textStatus, jqXHR) {
-                if(data.name=="Admin"&&data.pass=="123456"){
-                  $(location).attr('href',"/events");
-                }else{
-                    alert("Invalid user or pass.");
-                }
-            }
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert("fail");
-        });
+  $(document).ready(function () {
+    $('#login-form').on('submit', function (event) {
+      event.preventDefault(); // or return false, your choice
+      $.ajax({
+        url: "/eventpage",
+        type: 'post',
+        data: { name: $("#your_name").val(), pass: $("#your_pass").val() },
+        success: function (data, textStatus, jqXHR) {
+          if (data.name == "Admin" && data.pass == "123456") {
+            $(location).attr('href', "/events");
+          } else {
+            alert("Invalid user or pass.");
+          }
+        }
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert("fail");
+      });
     });
   });
 </script>
 
-</body></html>

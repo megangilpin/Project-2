@@ -3,6 +3,10 @@ var http = require('http');
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+// added this for mailgun testing - leave this hear for now (signed, Emily)
+// var sendmail = require("./public/js/sendmail");
+// sendmail();
+
 var db = require("./models");
 
 var app = express();
@@ -23,10 +27,12 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-var routes = require("./routes/apiRoutes")(app);
+require("./routes/apiRoutes")(app);
+require("./routes/user-apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+// have set this to TRUE so that the Sequelize will run during development (need to change back to FALSE later)
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
