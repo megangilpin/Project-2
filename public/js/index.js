@@ -15,11 +15,18 @@ var $questionTwo = $("#question-two");
 var $questionThree = $("#question-three");
 var $submitBtn = $("#submit");
 var $eventList = $("#event-list");
-var $signup = $("#signup");
-var $newUserName = $("#newUserName");
+
+// register user page elements
+var $newUserFirstName = $("#newUserFirstName");
+var $newUserLastName = $("#newUserLastName");
+var $companyName = $("#companyName");
 var $newUserEmail = $("#newUserEmail");
+var $newUserUName = $("#newUserUName");
+var $newUserPhoto = $("#newUserPhoto");
 var $newUserPass = $("#newUserPass");
 var $reNewUserPass = $("#reNewUserPass");
+// register button
+var $signup = $("#signup");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -132,33 +139,6 @@ var handleFormSubmit = function(event) {
   $questionThree.val("");
 };
 
-// Adds new user
-var addNewUserSubmit = function(user) {
-  event.preventDefault();
-
-  var user = {
-    name: $newUserName.val().trim(),
-    email: $newUserEmail.val().trim(),
-    password: $newUserPass.val().trim(),
-    re_password: $reNewUserPass.val().trim()
-  };
-  console.log(user);
-  if (user.password !== user.re_password) {
-    alert("Your passwords don't match, please try again");
-    return;
-  }
-  console.log(JSON.stringify(user));
-
-  API.addUser(user).then(function () {
-    alert("Congrats! You have registered, now lets plan that even!");
-  });
-
-  $newUserName.val("");
-  $newUserEmail.val("");
-  $newUserPass.val("");
-  $reNewUserPass.val("");
-};
-
 // handleDeleteBtnClick is called when an event's delete button is clicked
 // Remove the event detail from the db and refresh the list
 var handleDeleteBtnClick = function() {
@@ -169,6 +149,41 @@ var handleDeleteBtnClick = function() {
   API.deleteEvent(idToDelete).then(function() {
     refreshEvents();
   });
+};
+
+// Adds new user
+var addNewUserSubmit = function() {
+  event.preventDefault();
+
+  var user = {
+    first_name: $newUserFirstName.val().trim(),
+    last_name: $newUserLastName.val().trim(),
+    company: $companyName.val().trim(),
+    email: $newUserEmail.val().trim(),
+    username: $newUserUName.val().trim(),
+    photo: $newUserPhoto.val().trim(),
+    password: $newUserPass.val().trim()
+  };
+  $reNewUserPass.val().trim();
+  console.log(user);
+
+  // if (user.password !== $reNewUserPass) {
+  //   alert("Your passwords don't match, please try again");
+  //   return;
+  // }
+
+  API.addUser(user).then(function() {
+    alert("Congrats! You have registered, now lets plan that even!");
+  });
+
+  $newUserFirstName.val("");
+  $newUserLastName.val("");
+  $companyName.val("");
+  $newUserEmail.val("");
+  $newUserUName.val("");
+  $newUserPhoto.val("");
+  $newUserPass.val("");
+  $reNewUserPass.val("");
 };
 
 // Add event listeners to the submit and delete buttons
