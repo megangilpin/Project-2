@@ -5,7 +5,7 @@ var app = express();
 
 var db = require("../models");
 
-module.exports = function() {
+module.exports = function(app) {
   console.log("++++++++++++++++++++++++++++++++++ mailgun");
 
   var api_key = process.env.API_ID;
@@ -20,11 +20,12 @@ module.exports = function() {
     var data = {
       from: from_who,
       to: req.params.mail,
-      subject: "You've been checked in for " + "ENTER EVENT NAME",
+      subject: "You've been checked in!",
       html:
-        'Welcome to the EVENT NAME -- Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href="http://0.0.0.0:3030/validate?' +
+        'Hello, This is not a plain-text email. <a href="http://0.0.0.0:3030/validate?' +
         req.params.mail +
-        '">Click here to add your email address to a mailing list</a>'
+        ". This is who sent the email." +
+        from_who
     };
 
     //Invokes the method to send emails given the above data with the helper library

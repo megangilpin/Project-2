@@ -32,7 +32,7 @@ var API = {
   sendGuestEmail: function(email) {
     return $.ajax({
       type: "GET",
-      url: "api/submit/" + email
+      url: "/api/submit/" + email
     });
   }
 };
@@ -87,7 +87,7 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  //   API.sendGuestEmail(guest.email);
+  handleSendEmail();
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
@@ -115,13 +115,15 @@ var handleDeleteBtnClick = function() {
 };
 
 var handleSendEmail = function() {
+  console.log("in handlesendemail function");
   var idToEmail = $(this) || $("data-attr", ""); // assuming that the id is stored on the element
   // var email = get the email address from the id in the mysql
   // send the email to the sendGuestEmail(email) function
   //   return
+
+  API.sendGuestEmail("guestlister.app@gmail.com");
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$submitBtn.on("click", handleFormSubmit, handleSendEmail);
 $guestList.on("click", ".delete", handleDeleteBtnClick);
-$emailSend.on("click", handleSendEmail);
