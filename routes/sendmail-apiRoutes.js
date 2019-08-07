@@ -14,16 +14,17 @@ module.exports = function() {
 
   // button click will send the invitation email (wrap in a function)
   app.get("/api/submit/:mail", function(req, res) {
-    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
     console.log("in the snedmail js");
+    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
+
     var data = {
       from: from_who,
       to: req.params.mail,
       subject: "You've been checked in for " + "ENTER EVENT NAME",
       html:
-        "Welcome to the EVENT NAME -- Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href=\"http://0.0.0.0:3030/validate?" +
+        'Welcome to the EVENT NAME -- Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href="http://0.0.0.0:3030/validate?' +
         req.params.mail +
-        "\">Click here to add your email address to a mailing list</a>"
+        '">Click here to add your email address to a mailing list</a>'
     };
 
     //Invokes the method to send emails given the above data with the helper library
