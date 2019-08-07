@@ -23,7 +23,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/events", function (req, res) {
+  app.get("/events", function(req, res) {
     res.render("events", {
       layout: "view"
     });
@@ -54,7 +54,9 @@ module.exports = function(app) {
   // });
 
   app.get("/register", function(req, res) {
-    res.render("register");
+    res.render("register", {
+      layout: "view"
+    });
   });
 
   app.get("/events", function(req, res) {
@@ -64,7 +66,6 @@ module.exports = function(app) {
   app.get("/guestlist", function(req, res) {
     res.render("guestlist");
   });
-
 
   app.post("/eventpage", function(req, res) {
     var name = req.body.name;
