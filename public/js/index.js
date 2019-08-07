@@ -172,18 +172,20 @@ var addNewUserSubmit = function() {
     return;
   }
 
-  API.addUser(user).then(function() {
-    alert("Congrats! You have registered, now lets plan that even!");
+  API.addUser(user).then(function(result) {
+    if (result.errors[0].message === "Validation isEmail on email failed") {
+      alert("Please enter a valid email address");
+    } else {
+      $newUserFirstName.val("");
+      $newUserLastName.val("");
+      $companyName.val("");
+      $newUserEmail.val("");
+      $newUserUName.val("");
+      $newUserPhoto.val("");
+      $newUserPass.val("");
+      $reNewUserPass.val("");
+    }
   });
-
-  $newUserFirstName.val("");
-  $newUserLastName.val("");
-  $companyName.val("");
-  $newUserEmail.val("");
-  $newUserUName.val("");
-  $newUserPhoto.val("");
-  $newUserPass.val("");
-  $reNewUserPass.val("");
 };
 
 // Add event listeners to the submit and delete buttons
