@@ -2,45 +2,6 @@
 <div class="main">
 
   <!-- Sign up form -->
-  <section class="signup">
-    <div class="container">
-      <div class="signup-content">
-        <div class="signup-form">
-          <h2 class="form-title">Sign up</h2>
-          <form method="POST" class="register-form" id="register-form">
-
-              <div class="form-group">
-                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" name="name" id="newUserName" placeholder="Your Name" />
-              </div>
-              <div class="form-group">
-                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                <input type="email" name="email" id="newUserEmail" placeholder="Your Email" />
-              </div>
-              <div class="form-group">
-                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password" name="pass" id="newUserPass" placeholder="Password" />
-              </div>
-              <div class="form-group">
-                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                <input type="password" name="re_pass" id="reNewUserPass" placeholder="Repeat your password" />
-              </div>
-              <div class="form-button">
-                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
-              </div>
-
-          </form>
-        </div>
-        <div class="signup-image">
-          <figure><img src="https://vignette.wikia.nocookie.net/nickelodeon/images/0/02/SpongeBob_in_2018.png/revision/latest?cb=20190607225227" alt="sign up image"></figure>
-          <a href="#" class="signup-image-link">placeholder for Admin login modal</a>
-          <a href="/portal">Take me to portal</a>
-          <a href="/guests">My Guestlist</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="sign-in" style="padding-top: 50px;">
     <div class="container">
       <div class="signin-content">
@@ -68,6 +29,8 @@
               <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
             </div>
           </form>
+            <a href="/portal">Take me to portal</a>
+            <a class="mx-2" href="/guestlist">My Guestlist</a>
         </div>
       </div>
     </div>

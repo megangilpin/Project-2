@@ -15,11 +15,18 @@ var $questionTwo = $("#question-two");
 var $questionThree = $("#question-three");
 var $submitBtn = $("#submit");
 var $eventList = $("#event-list");
-var $signup = $("#signup");
-var $newUserName = $("#newUserName");
+
+// register user page elements
+var $newUserFirstName = $("#newUserFirstName");
+var $newUserLastName = $("#newUserLastName");
+var $companyName = $("#companyName");
 var $newUserEmail = $("#newUserEmail");
+var $newUserUName = $("#newUserUName");
+var $newUserPhoto = $("#newUserPhoto");
 var $newUserPass = $("#newUserPass");
 var $reNewUserPass = $("#reNewUserPass");
+// register button
+var $signup = $("#signup");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -132,21 +139,39 @@ var handleFormSubmit = function(event) {
   $questionThree.val("");
 };
 
+// handleDeleteBtnClick is called when an event's delete button is clicked
+// Remove the event detail from the db and refresh the list
+var handleDeleteBtnClick = function() {
+  var idToDelete = $(this)
+    .parent()
+    .attr("data-id");
+
+  API.deleteEvent(idToDelete).then(function() {
+    refreshEvents();
+  });
+};
+
 // Adds new user
-var addNewUserSubmit = function(user) {
+var addNewUserSubmit = function() {
   event.preventDefault();
 
   var user = {
-    name: $newUserName.val().trim(),
+    first_name: $newUserFirstName.val().trim(),
+    last_name: $newUserLastName.val().trim(),
+    company: $companyName.val().trim(),
     email: $newUserEmail.val().trim(),
-    password: $newUserPass.val().trim(),
-    re_password: $reNewUserPass.val().trim()
+    username: $newUserUName.val().trim(),
+    photo: $newUserPhoto.val().trim(),
+    password: $newUserPass.val().trim()
   };
+  var confirmPassword = $reNewUserPass.val().trim();
   console.log(user);
-  if (user.password !== user.re_password) {
+
+  if (user.password !== confirmPassword) {
     alert("Your passwords don't match, please try again");
     return;
   }
+<<<<<<< HEAD
   console.log(JSON.stringify(user));
 
   API.addUser(user).then(function() {
@@ -165,9 +190,22 @@ var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
+=======
+>>>>>>> 104f0898d31821eb427c6d845794e5e97f14a45a
 
-  API.deleteEvent(idToDelete).then(function() {
-    refreshEvents();
+  API.addUser(user).then(function(result) {
+    if (result.errors[0].message === "Validation isEmail on email failed") {
+      alert("Please enter a valid email address");
+    } else {
+      $newUserFirstName.val("");
+      $newUserLastName.val("");
+      $companyName.val("");
+      $newUserEmail.val("");
+      $newUserUName.val("");
+      $newUserPhoto.val("");
+      $newUserPass.val("");
+      $reNewUserPass.val("");
+    }
   });
 };
 
