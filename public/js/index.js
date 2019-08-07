@@ -164,13 +164,13 @@ var addNewUserSubmit = function() {
     photo: $newUserPhoto.val().trim(),
     password: $newUserPass.val().trim()
   };
-  $reNewUserPass.val().trim();
+  var confirmPassword = $reNewUserPass.val().trim();
   console.log(user);
 
-  // if (user.password !== $reNewUserPass) {
-  //   alert("Your passwords don't match, please try again");
-  //   return;
-  // }
+  if (user.password !== confirmPassword) {
+    alert("Your passwords don't match, please try again");
+    return;
+  }
 
   API.addUser(user).then(function() {
     alert("Congrats! You have registered, now lets plan that even!");
