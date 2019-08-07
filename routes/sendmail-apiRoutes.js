@@ -22,9 +22,9 @@ module.exports = function(app) {
       to: req.params.mail,
       subject: "You've been checked in!",
       html:
-        'Hello, This is not a plain-text email. <a href="http://0.0.0.0:3030/validate?' +
+        "Hello, This is not a plain-text email being sent to" +
         req.params.mail +
-        ". This is who sent the email." +
+        ". And this message is coming from: " +
         from_who
     };
 
@@ -39,8 +39,7 @@ module.exports = function(app) {
       else {
         console.log("sending mailgun messgae");
         // this is where the page will be updated with an email being sent
-        // res.render("guests", { status: "invite sent" });
-        res.html("success");
+        // res.render("handlebarspage....", { status: "invite sent" });
         console.log(body);
       }
     });
