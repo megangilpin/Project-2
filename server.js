@@ -1,5 +1,5 @@
 require("dotenv").config();
-var http = require('http'); 
+var http = require("http");
 var express = require("express");
 var exphbs = require("express-handlebars");
 
@@ -30,6 +30,7 @@ app.set("view engine", "handlebars");
 require("./routes/guest-apiRoutes")(app);
 require("./routes/apiRoutes")(app);
 require("./routes/user-apiRoutes")(app);
+require("./routes/sendmail-apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 // have set this to TRUE so that the Sequelize will run during development (need to change back to FALSE later)

@@ -40,28 +40,41 @@ module.exports = function(app) {
     var checked_in = req.body.checked_in;
     // will be happening on a differnet api call
 
-      .db.Guests.update(
-        {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          organization: org
+    db.Guests.update(
+      {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        organization: org
         // vip: vip
-        },
-        {
-          wjere: {
-            id: req.body.id
-          }
+      },
+      {
+        wjere: {
+          id: req.body.id
         }
-      )
-      .then(function(dbGuest) {
-          res.json(dbGuest);
-        });
+      }
+    ).then(function(dbGuest) {
+      res.json(dbGuest);
+    });
   });
 
   //   CHECK IN PROCESS -----------------------
   app.put("/api/guests/checkin/:id", function(req, res) {
-    //   need to write this
+    console.log(req);
+    console.log("in the checkin api");
+    db.Guests.update(
+      {
+        checked_in: true
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbGuest) {
+      alert("successful checkin");
+      res.json(dbGuest);
+    });
   });
 
   //   MAILGUN PROCESS -----------------------

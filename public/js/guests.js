@@ -31,7 +31,7 @@ var API = {
   },
   sendGuestEmail: function(email) {
     return $.ajax({
-      type: "POST",
+      type: "GET",
       url: "api/submit/" + email
     });
   }
@@ -114,6 +114,14 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+var handleSendEmail = function() {
+  var idToEmail = $(this) || $("data-attr", ""); // assuming that the id is stored on the element
+  // var email = get the email address from the id in the mysql
+  // send the email to the sendGuestEmail(email) function
+  //   return
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $guestList.on("click", ".delete", handleDeleteBtnClick);
+$emailSend.on("click", handleSendEmail);

@@ -12,22 +12,16 @@ module.exports = function() {
   var domain = process.env.DOMAIN;
   var from_who = process.env.EMAIL;
 
-  // Send a message to the specified email address when you navigate to /submit/someaddr@email.com
-  // The index redirects here
+  // button click will send the invitation email (wrap in a function)
   app.get("/api/submit/:mail", function(req, res) {
-    //We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
     var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
-
+    console.log("in the snedmail js");
     var data = {
-      //Specify email data
       from: from_who,
-      //The email to contact
       to: req.params.mail,
-      //Subject and text data
       subject: "You've been checked in for " + "ENTER EVENT NAME",
       html:
-      "Welcome to the EVENT NAME"
-        "Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href=\"http://0.0.0.0:3030/validate?" +
+        "Welcome to the EVENT NAME -- Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href=\"http://0.0.0.0:3030/validate?" +
         req.params.mail +
         "\">Click here to add your email address to a mailing list</a>"
     };
@@ -39,9 +33,12 @@ module.exports = function() {
         res.render("error", { error: err });
         console.log("got an error: ", err);
       }
-      //Else we can greet    and leave
+      //Else we can greet and leave
       else {
-        res.render("guests", { status: "invite sent" });
+        console.log("sending mailgun messgae");
+        // this is where the page will be updated with an email being sent
+        // res.render("guests", { status: "invite sent" });
+        res.html("success");
         console.log(body);
       }
     });
