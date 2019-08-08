@@ -131,7 +131,7 @@
                         <div class="form-group">
                             <label for="default" class="control-label col-md-3">VIP</label>
                             <div class="col-md-8">
-                                <input id="guest-vip" type="text" class="form-control" placeholder=""> 
+                                <input id="guest-vip" type="text" class="form-control" placeholder="1"> 
                             </div>
                         </div>
                     </div>
@@ -366,6 +366,8 @@
                                         <th> Option</th>
                                     </tr>
                                 </thead>
+                                
+                                <script id="example-template" type="text/x-handlebars-template">
                                 <tbody id="guest-list">
                                     {{!-- HANDLEBARS EACH --}}
                                     {{#each guests}}
@@ -373,30 +375,28 @@
 
                                             {{!-- checkmark box (with ID) --}}
                                             <td>
-                                                <label id={{this.id}} class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                <label id={{id}} class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" />
                                                     <span></span>
                                                 </label>
                                             </td>
                                             {{!-- first_name --}}
-                                            <td> {{this.first_name}} </td>
+                                            <td> {{first_name}} </td>
 
                                             {{!-- last_name --}}
-                                            <td> {{this.last_name}} </td>
+                                            <td> {{last_name}} </td>
 
                                             {{!-- email --}}
-                                            <td>
-                                                <a>{{this.email}}"</a>
-                                            </td>
+                                            <td> {{email}} </td>
 
                                             {{!-- organization --}}
                                             <td class="center"> 
-                                                {{this.organization}} 
+                                                {{organization}} 
                                             </td>
 
                                             {{!-- vip --}}
                                             <td>
-                                                {{this.vip}}
+                                                {{vip}}
                                             </td>
                                             <td>
                                                 <div class="btn-group" style="position:relative;">
@@ -424,6 +424,7 @@
                                     {{/each}}
 
                                 </tbody>
+                                </script>
                             </table>
                         </div>
                     </div>
@@ -471,7 +472,9 @@
         <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
         {{!-- LINK TO GUESTS FILE --}}
         <script src="/js/guests.js"></script>
-{{!-- 
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
         <script>
             $(document).ready(function()
             {
@@ -480,4 +483,4 @@
                     $('#radio1003').attr('checked', 'checked');
                 });
             })
-        </script> --}}
+        </script>

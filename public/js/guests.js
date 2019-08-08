@@ -1,3 +1,5 @@
+require();;
+
 // Get references to page elements
 var $guestFirstName = $("#guest-first-name");
 var $guestLastName = $("#guest-last-name");
@@ -46,31 +48,77 @@ var API = {
 
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
+  var theTemplateScript = $("#example-template").html();
+  var theTemplate = Handlebars.compile(theTemplateScript);
+
   API.getGuest().then(function(data) {
-    var $guests = data.map(function(guest) {
-      // var $a = $("<a>")
-      //   // WHY IS THIS ".TEXT"?
-      //   .text(guest.text)
-      //   .attr("href", "/guests/" + guest.id);
+    console.log("refreshGuests function -------");
 
-      // var $li = $("<li>")
-      //   .attr({
-      //     class: "list-group-item",
-      //     "data-id": guest.id
-      //   })
-      //   .append($a);
+    var context = {
+      people: [
+        { id: data.id },
+        { first_name: data.first_name },
+        { last: data.last_name },
+        { email: data.email },
+        { organization: data.organization },
+        { vip: data.vip }
+      ]
+    };
 
-      // var $button = $("<button>")
-      //   .addClass("btn btn-danger float-right delete")
-      //   .text("x");
+    var theCompiledHtml = theTemplate(context);
 
-      // $li.append($button);
+    $(document.body).append(theCompiledHtml);
 
-      return data;
-    });
+    // var $guests = data.map(function(guest) {
+    //   var $gfn = $("<td>")
+    //     // WHY IS THIS ".TEXT"?
+    //     .text(guest)
+    //     .attr({
+    //       href: "/guests/" + guest.id,
+    //       "data-id": guest.id
+    //     });
 
-    $guestList.empty();
-    $guestList.append($guests);
+    //   var $gln = $("<td>")
+    //     .text(guest)
+    //     .attr({
+    //       class: "list-group-item",
+    //       "data-id": guest.id
+    //     });
+
+    //   var $ge = $("<td>")
+    //     .text(guest)
+    //     .attr({
+    //       class: "list-group-item",
+    //       "data-id": guest.id
+    //     });
+
+    //   var $go = $("<td>")
+    //     .text(guest)
+    //     .attr({
+    //       "data-id": guest.id
+    //     });
+
+    //   var $vip = $("<td>")
+    //     .text(guest)
+    //     .attr({
+    //       "data-id": guest.id
+    //     });
+
+    //   var $tableRow = $("tr>");
+
+    //   $tableRow
+    //     .append($gfn)
+    //     .append($gln)
+    //     .append($ge)
+    //     .append($go)
+    //     .append($vip);
+
+    //   console.log($tableRow);
+    //   return $tableRow;
+    // });
+
+    // $guestList.empty();
+    // $guestList.append($guests);
   });
 };
 
@@ -106,7 +154,7 @@ var handleFormSubmit = function(guest) {
   $guestLastName.val("");
   $guestEmail.val("");
   $guestOrg.val("");
-  $guestVIP.val("");
+  $guestVIP.val("1");
 };
 
 // handleDeleteBtnClick is called when an guest's delete button is clicked
