@@ -171,27 +171,6 @@ var addNewUserSubmit = function() {
     alert("Your passwords don't match, please try again");
     return;
   }
-<<<<<<< HEAD
-  console.log(JSON.stringify(user));
-
-  API.addUser(user).then(function() {
-    alert("Congrats! You have registered, now lets plan that even!");
-  });
-
-  $newUserName.val("");
-  $newUserEmail.val("");
-  $newUserPass.val("");
-  $reNewUserPass.val("");
-};
-
-// handleDeleteBtnClick is called when an event's delete button is clicked
-// Remove the event detail from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-=======
->>>>>>> 104f0898d31821eb427c6d845794e5e97f14a45a
 
   API.addUser(user).then(function(result) {
     if (result.errors[0].message === "Validation isEmail on email failed") {

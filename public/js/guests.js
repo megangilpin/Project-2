@@ -40,26 +40,26 @@ var API = {
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
-    var $guests = data.map(function(guest) {
-      var $a = $("<a>")
-        // WHY IS THIS ".TEXT"?
-        .text(guest.text)
-        .attr("href", "/guests/" + guest.id);
+    // var $guests = data.map(function(guest) {
+    //   var $a = $("<a>")
+    //     // WHY IS THIS ".TEXT"?
+    //     .text(guest.text)
+    //     .attr("href", "/guests/" + guest.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": guest.id
-        })
-        .append($a);
+    //   var $li = $("<li>")
+    //     .attr({
+    //       class: "list-group-item",
+    //       "data-id": guest.id
+    //     })
+    //     .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("x");
+    //   var $button = $("<button>")
+    //     .addClass("btn btn-danger float-right delete")
+    //     .text("x");
 
-      $li.append($button);
+    //   $li.append($button);
 
-      return $li;
+      return data;
     });
 
     $guestList.empty();
@@ -76,8 +76,8 @@ var handleFormSubmit = function(guest) {
     first_name: $guestFirstName.val().trim(),
     last_name: $guestLastName.val().trim(),
     email: $guestEmail.val().trim(),
-    org: $guestOrg.val().trim()
-    // vip: $guestVIP.val().trim()
+    org: $guestOrg.val().trim(),
+    vip: $guestVIP.val().trim()
   };
 
   if (!guest.email) {
@@ -98,7 +98,7 @@ var handleFormSubmit = function(guest) {
   $guestLastName.val("");
   $guestEmail.val("");
   $guestOrg.val("");
-  //   $guestVIP.val("");
+  $guestVIP.val("");
 };
 
 // handleDeleteBtnClick is called when an guest's delete button is clicked

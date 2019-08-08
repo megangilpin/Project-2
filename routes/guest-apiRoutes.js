@@ -4,12 +4,14 @@ var db = require("../models");
 module.exports = function(app) {
   app.get("/api/guests", function(req, res) {
     db.Guests.findAll({}).then(function(dbGuest) {
-      res.json(dbGuest);
+      console.log(dbGuest);
+      res.render("guestlist", dbGuest);
     });
   });
 
   // working
   app.post("/api/guests/add", function(req, res) {
+    console.log("ADDING NEW GUEST");
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
     var email = req.body.email;
@@ -22,8 +24,8 @@ module.exports = function(app) {
       first_name: firstName,
       last_name: lastName,
       email: email,
-      organization: org
-      //   vip: vip
+      organization: org,
+      vip: vip
     }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
