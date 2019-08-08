@@ -3,9 +3,10 @@ var $guestFirstName = $("#guest-first-name");
 var $guestLastName = $("#guest-last-name");
 var $guestEmail = $("#guest-email");
 var $guestOrg = $("#guest-org");
-// var $guestVIP = $("#guest-vip");
+var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
-var $guestList = $("guest-list");
+var $guestList = $("#guest-list");
+var $emailArrayCreated = $("#get-guest-emails");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -29,36 +30,43 @@ var API = {
       url: "api/guest/" + id
     });
   },
-  sendGuestEmail: function(email) {
+  sendCheckInEmail: function(id) {
     return $.ajax({
-      type: "POST",
-      url: "api/submit/" + email
+      type: "GET",
+      url: "/api/guest/checkin/" + id
+    });
+  },
+  sendInviteEmail: function(email) {
+    return $.ajax({
+      type: "GET",
+      url: "/api/guest/invite/" + email
     });
   }
 };
 
+// UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
     var $guests = data.map(function(guest) {
-      var $a = $("<a>")
-        // WHY IS THIS ".TEXT"?
-        .text(guest.text)
-        .attr("href", "/guests/" + guest.id);
+      // var $a = $("<a>")
+      //   // WHY IS THIS ".TEXT"?
+      //   .text(guest.text)
+      //   .attr("href", "/guests/" + guest.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": guest.id
-        })
-        .append($a);
+      // var $li = $("<li>")
+      //   .attr({
+      //     class: "list-group-item",
+      //     "data-id": guest.id
+      //   })
+      //   .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("x");
+      // var $button = $("<button>")
+      //   .addClass("btn btn-danger float-right delete")
+      //   .text("x");
 
-      $li.append($button);
+      // $li.append($button);
 
-      return $li;
+      return data;
     });
 
     $guestList.empty();
@@ -69,14 +77,15 @@ var refreshGuests = function() {
 // handleFormSubmit is called whenever we submit a new guest
 // Save the new guest to the db and refresh the list
 var handleFormSubmit = function(guest) {
+  console.log("SUBMIT BUTTON CLICKED");
   guest.preventDefault();
 
   var guest = {
     first_name: $guestFirstName.val().trim(),
     last_name: $guestLastName.val().trim(),
     email: $guestEmail.val().trim(),
-    org: $guestOrg.val().trim()
-    // vip: $guestVIP.val().trim()
+    org: $guestOrg.val().trim(),
+    vip: $guestVIP.val().trim()
   };
 
   if (!guest.email) {
@@ -86,7 +95,7 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  //   API.sendGuestEmail(guest.email);
+  handleSendEmail(email);
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
@@ -97,7 +106,7 @@ var handleFormSubmit = function(guest) {
   $guestLastName.val("");
   $guestEmail.val("");
   $guestOrg.val("");
-  //   $guestVIP.val("");
+  $guestVIP.val("");
 };
 
 // handleDeleteBtnClick is called when an guest's delete button is clicked
@@ -111,6 +120,13 @@ var handleDeleteBtnClick = function() {
   API.deleteGuest(idToDelete).then(function() {
     refreshGuests();
   });
+};
+
+// pass an array to this function
+var handleSendEmail = function(data) {
+  console.log("running handleSendEmail function -------");
+
+  API.sendInviteEmail(data);
 };
 
 // Add event listeners to the submit and delete buttons

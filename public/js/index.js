@@ -69,7 +69,7 @@ var refreshEvents = function() {
   API.getEvent().then(function(data) {
     var $events = data.map(function(event) {
       var $a = $("<a>")
-        .text(event.text)
+        .text(event.name)
         .attr("href", "/event/" + event.id);
 
       var $li = $("<li>")
