@@ -9,6 +9,39 @@
                 top: 50%;
                 color: #222; 
             }
+            
+            @media only screen and (max-width: 1000px) {
+                .page-logo {
+                    padding-left: 20% !important;
+                    padding-right: 0px;
+                    margin-top: -50px;
+                }
+
+                #fa-reply {
+                    transform: scale(1.8);
+                    margin-top: 30px;
+                    margin-left: 6% !important;
+                    color: #fff;
+                }
+            }
+
+            .page-logo {
+                font-size: 25px;
+                width: 300px !important;
+                padding-top: 0px !important;
+                font-weight: bold;
+                font-style: italic;
+                color: white;
+                padding-left: 30% !important;
+                padding-right: 0px !important;
+            }
+
+            #fa-reply {
+                transform: scale(1.8);
+                margin-top: 30px;
+                margin-left: 80%;
+                color: #fff;
+            }
         </style>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -134,10 +167,25 @@
             </div>
         </div>
     </div>
+    
     <body>
+        <div class="page-header navbar navbar-fixed-top" style="margin-bottom:50px;">                
+            <div class="page-header-inner ">
+                <div class="row">
+                <div class="col-md-2">
+                    <a href="/" ><i class="fa fa-reply" id="fa-reply"></i></a>
+                </div>
+                <div class="col-md-10">
+                    <div class="page-logo">
+                        <div style="font-size: 25px;width: 300px;padding-top: 15px !important;font-weight: bold;font-style: italic; color: white;"> Event Planning App</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-1"></div>
         <div class="page-container col-md-10">
-            <div class="page-content" style="padding-top:20px;">
+            <div class="page-content" style="padding-top:80px;">
                 <div class="col-md-12">
                     <div class="portlet light bordered">
                         <div class="portlet-title">
@@ -215,7 +263,7 @@
                 </div>
             </div>
         </div>
-        <div class="page-container col-md-1"></div>
+        <div class="col-md-1"></div>
     </div>
 
         <!-- BEGIN CORE PLUGINS -->
