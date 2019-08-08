@@ -5,7 +5,8 @@ var $guestEmail = $("#guest-email");
 var $guestOrg = $("#guest-org");
 var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
-var $guestList = $("guest-list");
+var $guestList = $("#guest-list");
+var $emailArrayCreated = $("#get-guest-emails");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -29,10 +30,16 @@ var API = {
       url: "api/guest/" + id
     });
   },
-  sendGuestEmail: function(email) {
+  sendCheckInEmail: function(id) {
     return $.ajax({
       type: "GET",
-      url: "/api/submit/" + email
+      url: "/api/guest/checkin/" + id
+    });
+  },
+  sendInviteEmail: function(email) {
+    return $.ajax({
+      type: "GET",
+      url: "/api/guest/invite/" + email
     });
   }
 };
@@ -88,7 +95,7 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  handleSendEmail();
+  handleSendEmail(email);
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
@@ -115,14 +122,11 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-var handleSendEmail = function() {
-  console.log("in handlesendemail function");
-  var idToEmail = $(this) || $("data-attr", ""); // assuming that the id is stored on the element
-  // var email = get the email address from the id in the mysql
-  // send the email to the sendGuestEmail(email) function
-  //   return
+// pass an array to this function
+var handleSendEmail = function(data) {
+  console.log("running handleSendEmail function -------");
 
-  API.sendGuestEmail("guestlister.app@gmail.com");
+  API.sendInviteEmail(data);
 };
 
 // Add event listeners to the submit and delete buttons

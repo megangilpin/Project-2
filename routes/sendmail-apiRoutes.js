@@ -12,23 +12,36 @@ module.exports = function(app) {
   var domain = process.env.DOMAIN;
   var from_who = process.env.EMAIL;
 
+  // CHECKIN
   // button click will send the invitation email (wrap in a function)
-  app.get("/api/submit/:mail", function(req, res) {
-    console.log("in the snedmail js");
-    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
+  app.get("/api/guest/checkin/:id", function(req, res) {
+    db.Guests.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
+      var checkinObj = {
+        // eventID: result.EventId,
+        firsName: result.first_name,
+        email: result.email
+      };
+      return checkinObj;
+    });
 
-    var eventName = "Event";
-    var question1 = "quesiton1 text text text";
-    var question2 = "question2 hi hi hi";
-    var question3 = "quesiton3 wooooooow";
+    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
+    // var question1 = "question1";
+    // var question2 = "question2";
+    // var question3 = "question3";
 
     var data = {
       from: from_who,
-      to: req.params.mail,
+      to: checkinObj.email,
       subject: "You've been checked in!",
       html:
         "<H1>Welcome to the" +
         eventName +
+        ", " +
+        checkinObj.firstName +
         "!</h1>" +
         "<p>We are so glad you are here with us</p>" +
         "<p>Get started with:</p>" +
@@ -48,6 +61,57 @@ module.exports = function(app) {
     };
 
     //Invokes the method to send emails given the above data with the helper library
+    mailgun.messages().send(data, function(err, body) {
+      //If there is an error, render the error page
+      if (err) {
+        res.render("error", { error: err });
+        console.log("got an error: ", err);
+      }
+      //Else we can greet and leave
+      else {
+        console.log("sending mailgun messgae");
+        // this is where the page will be updated with an email being sent
+        // res.render("handlebarspage....", { status: "invite sent" });
+        console.log(body);
+      }
+    });
+  });
+
+  // INVITATION
+  app.get("/api/guest/invite/:mail", function(req, res) {
+    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
+
+    var eventName = "Event";
+    var location = "";
+    var startTime = "";
+    var endTime = "";
+    var date = "";
+
+    var data = {
+      from: from_who,
+      to: req.params.mail,
+      subject: "You're invited!",
+      html:
+        "<H1>You're invited!</h1>" +
+        "<p>Join us for the: " +
+        eventName +
+        "<p>Details: </p>" +
+        "<ul>" +
+        "<li>Date: " +
+        date +
+        "</li>" +
+        "<li>Location: " +
+        location +
+        "</li>" +
+        "<li>From: " +
+        startTime +
+        " to " +
+        endTime +
+        "</li>" +
+        "<ul>" +
+        "<p>See you there!</p>"
+    };
+
     mailgun.messages().send(data, function(err, body) {
       //If there is an error, render the error page
       if (err) {
