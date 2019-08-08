@@ -13,7 +13,7 @@ var $eventZipcode = $("#event-zipcode");
 var $questionOne = $("#question-one");
 var $questionTwo = $("#question-two");
 var $questionThree = $("#question-three");
-var $submitBtn = $("#submit");
+var $submitEvent = $("#submitEvent");
 var $eventList = $("#event-list");
 
 // register user page elements
@@ -189,6 +189,6 @@ var addNewUserSubmit = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$submitEvent.on("click", handleFormSubmit);
 $signup.on("click", addNewUserSubmit);
 $eventList.on("click", ".delete", handleDeleteBtnClick);

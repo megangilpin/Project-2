@@ -95,7 +95,7 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  handleSendEmail(email);
+  handleSendEmail(guest.email);
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
