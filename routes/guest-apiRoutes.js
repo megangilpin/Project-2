@@ -16,7 +16,7 @@ module.exports = function(app) {
     var lastName = req.body.last_name;
     var email = req.body.email;
     var org = req.body.org;
-    // var vip = req.body.vip;
+    var vip = req.body.vip;
 
     console.log(req.body);
 

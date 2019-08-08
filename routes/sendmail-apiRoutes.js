@@ -17,15 +17,34 @@ module.exports = function(app) {
     console.log("in the snedmail js");
     var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
 
+    var eventName = "Event";
+    var question1 = "quesiton1 text text text";
+    var question2 = "question2 hi hi hi";
+    var question3 = "quesiton3 wooooooow";
+
     var data = {
       from: from_who,
       to: req.params.mail,
       subject: "You've been checked in!",
       html:
-        "Hello, This is not a plain-text email being sent to" +
-        req.params.mail +
-        ". And this message is coming from: " +
-        from_who
+        "<H1>Welcome to the" +
+        eventName +
+        "!</h1>" +
+        "<p>We are so glad you are here with us</p>" +
+        "<p>Get started with:</p>" +
+        "<ol>" +
+        "<li>" +
+        question1 +
+        "</li>" +
+        "<li>" +
+        question2 +
+        "</li>" +
+        "<li>" +
+        question3 +
+        "</li>" +
+        "</ol>" +
+        "<p>If you have any questions alon the way, let us know</p>" +
+        "<p>Enjoy!</p>"
     };
 
     //Invokes the method to send emails given the above data with the helper library

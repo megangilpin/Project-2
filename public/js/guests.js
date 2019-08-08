@@ -3,7 +3,7 @@ var $guestFirstName = $("#guest-first-name");
 var $guestLastName = $("#guest-last-name");
 var $guestEmail = $("#guest-email");
 var $guestOrg = $("#guest-org");
-// var $guestVIP = $("#guest-vip");
+var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("guest-list");
 
@@ -40,24 +40,24 @@ var API = {
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
-    // var $guests = data.map(function(guest) {
-    //   var $a = $("<a>")
-    //     // WHY IS THIS ".TEXT"?
-    //     .text(guest.text)
-    //     .attr("href", "/guests/" + guest.id);
+    var $guests = data.map(function(guest) {
+      // var $a = $("<a>")
+      //   // WHY IS THIS ".TEXT"?
+      //   .text(guest.text)
+      //   .attr("href", "/guests/" + guest.id);
 
-    //   var $li = $("<li>")
-    //     .attr({
-    //       class: "list-group-item",
-    //       "data-id": guest.id
-    //     })
-    //     .append($a);
+      // var $li = $("<li>")
+      //   .attr({
+      //     class: "list-group-item",
+      //     "data-id": guest.id
+      //   })
+      //   .append($a);
 
-    //   var $button = $("<button>")
-    //     .addClass("btn btn-danger float-right delete")
-    //     .text("x");
+      // var $button = $("<button>")
+      //   .addClass("btn btn-danger float-right delete")
+      //   .text("x");
 
-    //   $li.append($button);
+      // $li.append($button);
 
       return data;
     });
@@ -70,6 +70,7 @@ var refreshGuests = function() {
 // handleFormSubmit is called whenever we submit a new guest
 // Save the new guest to the db and refresh the list
 var handleFormSubmit = function(guest) {
+  console.log("SUBMIT BUTTON CLICKED");
   guest.preventDefault();
 
   var guest = {
@@ -125,5 +126,5 @@ var handleSendEmail = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit, handleSendEmail);
+$submitBtn.on("click", handleFormSubmit);
 $guestList.on("click", ".delete", handleDeleteBtnClick);
