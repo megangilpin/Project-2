@@ -25,7 +25,7 @@ module.exports = function(app) {
         firsName: result.first_name,
         email: result.email
       };
-      return checkinObj;
+      return checkinObj.get();
     });
 
     var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
