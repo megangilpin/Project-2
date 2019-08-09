@@ -237,40 +237,34 @@
                             </thead>
                             <tbody>
                                 <tr class="odd gradeX">
-                                    <td>
-                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                            <input type="checkbox" class="checkboxes" value="1" />
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                    <td><a href="/guestlist"> Event1 </a></td>
-                                    <td>
-                                        type1
-                                    </td>
-                                    <td>
-                                        23 July 2019 - 11:35
-                                    </td>
-                                    <td>
-                                        05 August 2019 - 10:50
-                                    </td>
-                                    <td><a class="label lable-sm label-danger" style="border-radius:10px;" href="/guestlist"> 42 </a></td>
-                                    <td>
-                                        <div class="btn-group" style="position:relative;">
-                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                <i class="fa fa-angle-down"></i>
-                                            </button>
-                                            <ul class="dropdown-menu pull-left" role="menu">
-                                                <li>
-                                                    <a data-toggle="modal" href="#form_modal1">
-                                                        <i class="fa fa-edit"></i> Edit </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">
-                                                        <i class="glyphicon glyphicon-remove"></i> Delete </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                                  <td>
+                                   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                     <input type="checkbox" class="checkboxes" value="1" />
+                                     <span></span>
+                                   </label>
+                                  </td>
+                                  <td><a href="/guestlist/{{id}}"> {{name}}</td>
+                                  <td>{{event_type}}</td>
+                                  <td>{{start_time}}</td>
+                                  <td>{{end_time}}</td>
+                                  <td><a class="label lable-sm label-danger" style="border-radius:10px;" href="/guestlist"> 42 </a></td>
+                                  <td>
+                                    <div class="btn-group" style="position:relative;">
+                                      <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                        <i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu pull-left" role="menu">
+                                        <li>
+                                          <a data-toggle="modal" href="#form_modal1">
+                                            <i class="fa fa-edit"></i> Edit </a>
+                                        </li>
+                                        <li>
+                                          <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-remove"></i> Delete </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
                                 </tr>
                             </tbody>
                         </table>

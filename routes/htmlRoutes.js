@@ -16,8 +16,12 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/guestlist", function(req, res) {
-    db.Guests.findAll({}).then(function(dbGuest) {
+  app.get("/guestlist/:eventid", function(req, res) {
+    db.Guests.findAll({
+      where: {
+        EventId: req.params.eventid
+      }
+    }).then(function(dbGuest) {
       res.render("guestlist", {
         layout: "view",
         guests: dbGuest
@@ -33,7 +37,11 @@ module.exports = function(app) {
 
   // This is currently what /guestlist shows. Will need to look more like /event/:id when connected to backend.
   app.get("/event/:id", function(req, res) {
-    db.Events.findOne({ where: { id: req.params.id } }).then(function(result) {
+    db.Events.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
       res.render("event", {
         event: result
       });

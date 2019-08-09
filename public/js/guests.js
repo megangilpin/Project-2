@@ -7,6 +7,7 @@ var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
+var $guestEventId = "1";
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -14,7 +15,7 @@ var API = {
     console.log(guest);
     return $.ajax({
       type: "POST",
-      url: "api/guests/add",
+      url: "/guestlist/api/guests/add",
       data: guest
     });
   },
@@ -62,7 +63,8 @@ var handleFormSubmit = function(guest) {
     last_name: $guestLastName.val().trim(),
     email: $guestEmail.val().trim(),
     org: $guestOrg.val().trim(),
-    vip: $guestVIP.val().trim()
+    vip: $guestVIP.val().trim(),
+    EventId: $guestEventId
   };
 
   if (!guest.email) {
