@@ -2,11 +2,10 @@ require("dotenv").config();
 var http = require("http"); 
 var express = require("express");
 var exphbs = require("express-handlebars");
+var passport = require("passport"); 
 var session = require("express-session"),
   bodyParser = require("body-parser");
-
-var passport = require("passport"); // pass passport for configuration
-
+require('./config/passport')(passport);
 // added this for mailgun testing - leave this hear for now (signed, Emily)
 // var sendmail = require("./public/js/sendmail");
 // sendmail();
