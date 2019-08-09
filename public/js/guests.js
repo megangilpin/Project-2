@@ -15,14 +15,14 @@ var API = {
     console.log(guest);
     return $.ajax({
       type: "POST",
-      url: "/guestlist/api/guests/add",
+      url: "guestlist/api/guests/:eventid/add",
       data: guest
     });
   },
   getGuest: function() {
     return $.ajax({
       type: "GET",
-      url: "api/guests"
+      url: "api/guestlist/:eventid"
     });
   },
   deleteGuest: function(id) {

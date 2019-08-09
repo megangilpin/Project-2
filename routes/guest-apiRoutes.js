@@ -1,22 +1,29 @@
 // fill this in with the route to access the guests names for events
 var db = require("../models");
+var holdEventId = "";
 
 module.exports = function(app) {
-  app.get("/api/guests", function(req, res) {
-    db.Guests.findAll({}).then(function(dbGuest) {
+  app.get("/api/guestlist/:eventid", function(req, res) {
+    db.Guests.findAll({
+      where: {
+        EventId: req.params.eventid
+      }
+    }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
     });
   });
 
-  // working
-  app.post("/guestlist/api/guests/add", function(req, res) {
+  // working on this one
+  app.post("/guestlist/api/guests/:eventid/add", function(req, res) {
     console.log("ADDING NEW GUEST");
+    // need to pass the EventId
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
+    var EventId = req.params.eventid;
 
     console.log(req.body);
 
@@ -25,7 +32,8 @@ module.exports = function(app) {
       last_name: lastName,
       email: email,
       organization: org,
-      vip: vip
+      vip: vip,
+      EventId: EventId
     }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
@@ -60,7 +68,7 @@ module.exports = function(app) {
     });
   });
 
-  //   CHECK IN PROCESS -----------------------
+  //   CHECK IN PROCESS ----------------------- href="/api/guests/checkin/:id"
   app.put("/api/guests/checkin/:id", function(req, res) {
     console.log(req);
     console.log("in the checkin api");
