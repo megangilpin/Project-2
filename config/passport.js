@@ -37,7 +37,9 @@ module.exports = function(passport) {
       User.Admins.findOne({ where: { username: username } }).then(function(
         err,
         user
-      ) {
+       ) {
+
+
         if (err) {
           return done(err);
         }
