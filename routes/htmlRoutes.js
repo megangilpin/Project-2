@@ -7,27 +7,29 @@ module.exports = function(app) {
   });
 
   // Needs to be deleted after events gets linked back end
-  app.get("/portal", function(req, res) {
+  app.get("/events", function(req, res) {
     db.Events.findAll({}).then(function(result) {
-      res.render("portal", {
-        layout: "portal",
-        msg: "Welcome!",
+      res.render("events", {
+        layout: "view",
         events: result
       });
     });
   });
 
   app.get("/guestlist", function(req, res) {
-    res.render("guestlist", {
-      layout: "view"
+    db.Guests.findAll({}).then(function(dbGuest) {
+      res.render("guestlist", {
+        layout: "view",
+        guests: dbGuest
+      });
     });
   });
 
-  app.get("/events", function(req, res) {
-    res.render("events", {
-      layout: "view"
-    });
-  });
+  // app.get("/events", function(req, res) {
+  //   res.render("events", {
+  //     layout: "view"
+  //   });
+  // });
 
   // This is currently what /guestlist shows. Will need to look more like /event/:id when connected to backend.
   app.get("/event/:id", function(req, res) {

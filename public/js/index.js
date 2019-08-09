@@ -1,3 +1,5 @@
+// import { doesNotReject } from "assert";
+
 /* eslint-disable camelcase */
 // Get references to page elements
 var $eventName = $("#event-name");
@@ -27,6 +29,10 @@ var $newUserPass = $("#newUserPass");
 var $reNewUserPass = $("#reNewUserPass");
 // register button
 var $signup = $("#signup");
+// user login button
+var $signin = $("#signin");
+var $userName = $("#userName");
+var $userPass = $("#userPass");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -61,38 +67,27 @@ var API = {
       url: "api/user",
       data: JSON.stringify(user)
     });
+  },
+  userLogin: function(user) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/user/login",
+      data: JSON.stringify(user)
+    });
   }
 };
 
 // refreshEvents gets new events from the db and repopulates the list
 var refreshEvents = function() {
-  API.getEvent().then(function(data) {
-    var $events = data.map(function(event) {
-      var $a = $("<a>")
-        .text(event.name)
-        .attr("href", "/event/" + event.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": event.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $eventList.empty();
-    $eventList.append($events);
+  API.getEvent().then(function() {
+    location.reload();
   });
 };
 
+// refreshEvents();
 // handleFormSubmit is called whenever we submit a new event
 // Save the new event to the db and refresh the list
 var handleFormSubmit = function(event) {
@@ -173,22 +168,33 @@ var addNewUserSubmit = function() {
   }
 
   API.addUser(user).then(function(result) {
-    if (result.errors[0].message === "Validation isEmail on email failed") {
-      alert("Please enter a valid email address");
-    } else {
-      $newUserFirstName.val("");
-      $newUserLastName.val("");
-      $companyName.val("");
-      $newUserEmail.val("");
-      $newUserUName.val("");
-      $newUserPhoto.val("");
-      $newUserPass.val("");
-      $reNewUserPass.val("");
-    }
+    // if (result.errors[0].message === "Validation isEmail on email failed") {
+    //   alert("Please enter a valid email address");
+    // } else {
+    $newUserFirstName.val("");
+    $newUserLastName.val("");
+    $companyName.val("");
+    $newUserEmail.val("");
+    $newUserUName.val("");
+    $newUserPhoto.val("");
+    $newUserPass.val("");
+    $reNewUserPass.val("");
+    // }
   });
 };
 
+var adminLogin = function() {
+  event.preventDefault();
+  var user = {
+    username: $userName.val().trim(),
+    password: $userPass.val().trim()
+  };
+  API.userLogin(user).then(result => {
+    window.location.href = "/events";
+  });
+};
 // Add event listeners to the submit and delete buttons
 $submitEvent.on("click", handleFormSubmit);
 $signup.on("click", addNewUserSubmit);
+$signin.on("click", adminLogin);
 $eventList.on("click", ".delete", handleDeleteBtnClick);
