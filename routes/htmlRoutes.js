@@ -18,8 +18,11 @@ module.exports = function(app) {
   });
 
   app.get("/guestlist", function(req, res) {
-    res.render("guestlist", {
-      layout: "view"
+    db.Guests.findAll({}).then(function(dbGuest) {
+      res.render("guestlist", {
+        layout: "view",
+        guests: dbGuest
+      });
     });
   });
 

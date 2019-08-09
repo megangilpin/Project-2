@@ -34,7 +34,7 @@ require("./routes/sendmail-apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 // have set this to TRUE so that the Sequelize will run during development (need to change back to FALSE later)
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
