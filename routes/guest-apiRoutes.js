@@ -27,7 +27,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    var EventId = holdEventId;
+    EventId = holdEventId;
 
     console.log(req.body);
 
@@ -59,8 +59,8 @@ module.exports = function(app) {
         first_name: firstName,
         last_name: lastName,
         email: email,
-        organization: org
-        // vip: vip
+        organization: org,
+        vip: vip
       },
       {
         wjere: {
@@ -72,10 +72,9 @@ module.exports = function(app) {
     });
   });
 
-  //   CHECK IN PROCESS ----------------------- href="/api/guests/checkin/:id"
-  app.put("/api/guests/checkin/:id", function(req, res) {
-    console.log(req);
-    console.log("in the checkin api");
+  //   GUEST CHECK IN PROCESS
+  // check in
+  app.post("/api/guest/checkin/:id", function(req, res) {
     db.Guests.update(
       {
         checked_in: true
@@ -86,7 +85,21 @@ module.exports = function(app) {
         }
       }
     ).then(function(dbGuest) {
-      alert("successful checkin");
+      res.json(dbGuest);
+    });
+  });
+  // uncheck in
+  app.post("/api/guest/uncheckin/:id", function(req, res) {
+    db.Guests.update(
+      {
+        checked_in: false
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbGuest) {
       res.json(dbGuest);
     });
   });

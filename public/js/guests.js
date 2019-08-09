@@ -7,7 +7,8 @@ var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
-var $guestEventId = "1";
+// var $guestEventId = "1";
+var $checkInBtn = $(".toggle-checkin");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -34,13 +35,25 @@ var API = {
   sendCheckInEmail: function(id) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/checkin/" + id
+      url: "/api/guest/emailcheckin" + id
     });
   },
   sendInviteEmail: function(email) {
     return $.ajax({
       type: "GET",
       url: "/api/guest/invite/" + email
+    });
+  },
+  checkInGuest: function(id) {
+    return $.ajax({
+      type: "POST",
+      url: "/api/guest/checkin/" + id
+    });
+  },
+  unCheckInGuest: function(id) {
+    return $.ajax({
+      type: "POST",
+      url: "/api/guest/uncheckin/" + id
     });
   }
 };
@@ -55,7 +68,6 @@ var refreshGuests = function() {
 // handleFormSubmit is called whenever we submit a new guest
 // Save the new guest to the db and refresh the list
 var handleFormSubmit = function(guest) {
-  console.log("SUBMIT BUTTON CLICKED");
   guest.preventDefault();
 
   var guest = {
@@ -67,10 +79,10 @@ var handleFormSubmit = function(guest) {
     EventId: $guestEventId
   };
 
-  if (!guest.email) {
-    alert("You must enter an email address");
-    return;
-  }
+  // if (!guest.email) {
+  //   alert("You must enter an email address");
+  //   return;
+  // }
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
@@ -108,6 +120,19 @@ var handleSendEmail = function(data) {
   // API.sendInviteEmail(data);
 };
 
+var handleCheckIn = function() {
+  $("#toggle-demo").bootstrapToggle("on");
+  var guestId = $(this).attr("data-id");
+  API.checkInGuest(guestId);
+};
+
+var handleUnCheckIn = function() {
+  $("#toggle-demo").bootstrapToggle("off");
+  var guestId = $(this).attr("data-id");
+  API.unCheckInGuest(guestId);
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $guestList.on("click", ".delete", handleDeleteBtnClick);
+$checkInBtn.on("click", handleCheckIn);
