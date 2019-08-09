@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.get("/api/guests", function(req, res) {
     db.Guests.findAll({}).then(function(dbGuest) {
       console.log(dbGuest);
-      res.render("guestlist", dbGuest);
+      res.json(dbGuest);
     });
   });
 

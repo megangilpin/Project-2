@@ -367,9 +367,8 @@
                                     </tr>
                                 </thead>
                                 
-                                <script id="example-template" type="text/x-handlebars-template">
-                                <tbody id="guest-list">
-                                    {{!-- HANDLEBARS EACH --}}
+                                <tbody>
+                                    {{!-- HANDLEBARS EACH --}}                                   
                                     {{#each guests}}
                                         <tr class="odd gradeX">
 
@@ -424,7 +423,7 @@
                                     {{/each}}
 
                                 </tbody>
-                                </script>
+                              
                             </table>
                         </div>
                     </div>
@@ -470,10 +469,11 @@
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
-        {{!-- LINK TO GUESTS FILE --}}
-        <script src="/js/guests.js"></script>
+        
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
+        
 
         <script>
             $(document).ready(function()
@@ -484,3 +484,6 @@
                 });
             })
         </script>
+
+        {{!-- LINK TO GUESTS FILE --}}
+        <script src="/js/guests.js"></script>

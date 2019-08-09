@@ -1,5 +1,3 @@
-require();;
-
 // Get references to page elements
 var $guestFirstName = $("#guest-first-name");
 var $guestLastName = $("#guest-last-name");
@@ -48,77 +46,8 @@ var API = {
 
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
-  var theTemplateScript = $("#example-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-
   API.getGuest().then(function(data) {
-    console.log("refreshGuests function -------");
-
-    var context = {
-      people: [
-        { id: data.id },
-        { first_name: data.first_name },
-        { last: data.last_name },
-        { email: data.email },
-        { organization: data.organization },
-        { vip: data.vip }
-      ]
-    };
-
-    var theCompiledHtml = theTemplate(context);
-
-    $(document.body).append(theCompiledHtml);
-
-    // var $guests = data.map(function(guest) {
-    //   var $gfn = $("<td>")
-    //     // WHY IS THIS ".TEXT"?
-    //     .text(guest)
-    //     .attr({
-    //       href: "/guests/" + guest.id,
-    //       "data-id": guest.id
-    //     });
-
-    //   var $gln = $("<td>")
-    //     .text(guest)
-    //     .attr({
-    //       class: "list-group-item",
-    //       "data-id": guest.id
-    //     });
-
-    //   var $ge = $("<td>")
-    //     .text(guest)
-    //     .attr({
-    //       class: "list-group-item",
-    //       "data-id": guest.id
-    //     });
-
-    //   var $go = $("<td>")
-    //     .text(guest)
-    //     .attr({
-    //       "data-id": guest.id
-    //     });
-
-    //   var $vip = $("<td>")
-    //     .text(guest)
-    //     .attr({
-    //       "data-id": guest.id
-    //     });
-
-    //   var $tableRow = $("tr>");
-
-    //   $tableRow
-    //     .append($gfn)
-    //     .append($gln)
-    //     .append($ge)
-    //     .append($go)
-    //     .append($vip);
-
-    //   console.log($tableRow);
-    //   return $tableRow;
-    // });
-
-    // $guestList.empty();
-    // $guestList.append($guests);
+    location.reload();
   });
 };
 
@@ -174,7 +103,7 @@ var handleDeleteBtnClick = function() {
 var handleSendEmail = function(data) {
   console.log("running handleSendEmail function -------");
 
-  API.sendInviteEmail(data);
+  // API.sendInviteEmail(data);
 };
 
 // Add event listeners to the submit and delete buttons
