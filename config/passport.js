@@ -34,7 +34,10 @@ module.exports = function(passport) {
 
   passport.use(
     new LocalStrategy(function(username, password, done) {
-      User.Admins.findOne({ username: username }, function(err, user) {
+      User.Admins.findOne({ where: { username: username } }).then(function(
+        err,
+        user
+      ) {
         if (err) {
           return done(err);
         }
