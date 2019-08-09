@@ -374,35 +374,37 @@
 
                                             {{!-- checkmark box (with ID) --}}
                                             <td>
-                                                <label id={{id}} class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                <label data-id={{id}} class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" />
                                                     <span></span>
                                                 </label>
                                             </td>
                                             {{!-- first_name --}}
-                                            <td> {{first_name}} </td>
+                                            <td data-id={{id}}> {{first_name}} </td>
 
                                             {{!-- last_name --}}
-                                            <td> {{last_name}} </td>
+                                            <td data-id={{id}}> {{last_name}} </td>
 
                                             {{!-- email --}}
-                                            <td> {{email}} </td>
+                                            <td data-id={{id}}> {{email}} </td>
 
                                             {{!-- organization --}}
-                                            <td class="center"> 
+                                            <td data-id={{id}} class="center"> 
                                                 {{organization}} 
                                             </td>
 
                                             {{!-- vip --}}
-                                            <td>
+                                            <td data-id={{id}}>
                                                 {{vip}}
                                             </td>
+
+                                            {{!-- check in toggle ON/OFF --}}
                                             <td>
                                                 <div class="btn-group" style="position:relative;">
-                                                        <input type="checkbox" checked class="make-switch" id="test" data-size="mini">
+                                                        <input type="checkbox" checked class="make-switch" data-id={{id}} data-size="mini">
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td class="pb-5">
                                                 <div class="btn-group" style="position:relative;">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                         <i class="fa fa-angle-down"></i>
