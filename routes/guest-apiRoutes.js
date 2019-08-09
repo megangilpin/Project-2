@@ -1,20 +1,22 @@
 // fill this in with the route to access the guests names for events
-"use strict";
 var db = require("../models");
 
 module.exports = function(app) {
   app.get("/api/guests", function(req, res) {
     db.Guests.findAll({}).then(function(dbGuest) {
+      console.log(dbGuest);
       res.json(dbGuest);
     });
   });
 
+  // working
   app.post("/api/guests/add", function(req, res) {
+    console.log("ADDING NEW GUEST");
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
     var email = req.body.email;
     var org = req.body.org;
-    // var vip = req.body.vip;
+    var vip = req.body.vip;
 
     console.log(req.body);
 
@@ -22,8 +24,8 @@ module.exports = function(app) {
       first_name: firstName,
       last_name: lastName,
       email: email,
-      organization: org
-      //   vip: vip
+      organization: org,
+      vip: vip
     }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
@@ -36,8 +38,9 @@ module.exports = function(app) {
     var lastName = req.body.last_name;
     var email = req.body.email;
     var org = req.body.organization;
-    // var vip = req.body.vip;
-    // checked_in will be happening on a differnet api call
+    var vip = req.body.vip;
+    var checked_in = req.body.checked_in;
+    // will be happening on a differnet api call
 
     db.Guests.update(
       {
@@ -59,7 +62,21 @@ module.exports = function(app) {
 
   //   CHECK IN PROCESS -----------------------
   app.put("/api/guests/checkin/:id", function(req, res) {
-    //   need to write this
+    console.log(req);
+    console.log("in the checkin api");
+    db.Guests.update(
+      {
+        checked_in: true
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbGuest) {
+      alert("successful checkin");
+      res.json(dbGuest);
+    });
   });
 
   //   MAILGUN PROCESS -----------------------

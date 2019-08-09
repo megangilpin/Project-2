@@ -15,7 +15,7 @@ var $eventZipcode = $("#event-zipcode");
 var $questionOne = $("#question-one");
 var $questionTwo = $("#question-two");
 var $questionThree = $("#question-three");
-var $submitBtn = $("#submit");
+var $submitEvent = $("#submitEvent");
 var $eventList = $("#event-list");
 
 // register user page elements
@@ -85,7 +85,7 @@ var refreshEvents = function() {
   API.getEvent().then(function(data) {
     var $events = data.map(function(event) {
       var $a = $("<a>")
-        .text(event.text)
+        .text(event.name)
         .attr("href", "/event/" + event.id);
 
       var $li = $("<li>")
@@ -215,7 +215,7 @@ var adminLogin = function() {
   });
 };
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$submitEvent.on("click", handleFormSubmit);
 $signup.on("click", addNewUserSubmit);
 $signin.on("click", adminLogin);
 $eventList.on("click", ".delete", handleDeleteBtnClick);
