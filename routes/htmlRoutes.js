@@ -37,11 +37,6 @@ module.exports = function(app) {
     });
   });
 
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
-
   app.get("/register", function(req, res) {
     res.render("register", {
       layout: "view"
@@ -55,5 +50,10 @@ module.exports = function(app) {
     if (name == "Admin" && pass == "123456") {
       res.json({ name: name, pass: pass });
     }
+  });
+
+  // Render 404 page for any unmatched routes
+  app.get("*", function (req, res) {
+    res.render("404");
   });
 };
