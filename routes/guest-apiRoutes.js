@@ -10,7 +10,7 @@ module.exports = function(app) {
   });
 
   // working
-  app.post("/api/guests/add", function(req, res) {
+  app.post("/guestlist/api/guests/add", function(req, res) {
     console.log("ADDING NEW GUEST");
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;

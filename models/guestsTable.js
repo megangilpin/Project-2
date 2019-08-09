@@ -34,13 +34,13 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Guests.associate = function(models) {
-  //   Guests.belongsTo(models.Events, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Guests.associate = function(models) {
+    Guests.belongsTo(models.Events, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
 
   return Guests;
 };
