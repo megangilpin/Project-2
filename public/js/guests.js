@@ -15,7 +15,7 @@ var API = {
     console.log(guest);
     return $.ajax({
       type: "POST",
-      url: "guestlist/api/guests/:eventid/add",
+      url: "guestlist/api/guests/add",
       data: guest
     });
   },

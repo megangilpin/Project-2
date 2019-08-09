@@ -4,18 +4,22 @@ var holdEventId = "";
 
 module.exports = function(app) {
   app.get("/api/guestlist/:eventid", function(req, res) {
+    holdEventId = req.params.eventid;
+    console.log("req.params.eventid:");
+    console.log(req.params.eventid);
     db.Guests.findAll({
       where: {
         EventId: req.params.eventid
       }
     }).then(function(dbGuest) {
       console.log(dbGuest);
+      console.log(holdEventId);
       res.json(dbGuest);
     });
   });
 
   // working on this one
-  app.post("/guestlist/api/guests/:eventid/add", function(req, res) {
+  app.post("/guestlist/api/guests/add", function(req, res) {
     console.log("ADDING NEW GUEST");
     // need to pass the EventId
     var firstName = req.body.first_name;
@@ -23,7 +27,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    var EventId = req.params.eventid;
+    var EventId = holdEventId;
 
     console.log(req.body);
 
@@ -33,7 +37,7 @@ module.exports = function(app) {
       email: email,
       organization: org,
       vip: vip,
-      EventId: EventId
+      EventId: holdEventId
     }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
