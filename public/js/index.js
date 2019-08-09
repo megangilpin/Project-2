@@ -82,33 +82,12 @@ var API = {
 
 // refreshEvents gets new events from the db and repopulates the list
 var refreshEvents = function() {
-  API.getEvent().then(function(data) {
-    var $events = data.map(function(event) {
-      var $a = $("<a>")
-        .text(event.name)
-        .attr("href", "/event/" + event.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": event.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $eventList.empty();
-    $eventList.append($events);
+  API.getEvent().then(function() {
+    location.reload();
   });
 };
 
+// refreshEvents();
 // handleFormSubmit is called whenever we submit a new event
 // Save the new event to the db and refresh the list
 var handleFormSubmit = function(event) {
