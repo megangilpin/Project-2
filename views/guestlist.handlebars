@@ -107,6 +107,7 @@
         <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
 
     </head>
+    <body>
     <div id="form_modal1" class="modal fade" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -118,40 +119,40 @@
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label for="default" class="control-label col-md-3">FirstName</label>
+                            <label for="default" class="control-label col-md-3">First Name</label>
                             <div class="col-md-8">
-                                <input id="default" type="text" class="form-control" placeholder="" required> 
+                                <input id="guest-first-name" type="text" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="default" class="control-label col-md-3">LastName</label>
+                            <label for="default" class="control-label col-md-3">Last Name</label>
                             <div class="col-md-8">
-                                <input id="default" type="text" class="form-control" placeholder="" required> 
+                                <input id="guest-last-name" type="text" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="default" class="control-label col-md-3">Email</label>
                             <div class="col-md-8">
-                                <input id="default" type="email" class="form-control" placeholder="" required>  
+                                <input id="guest-email" type="email" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="default" class="control-label col-md-3">Organization Guests'</label>
+                            <label for="default" class="control-label col-md-3">Guest's Organization</label>
                             <div class="col-md-8">
-                                <input id="default" type="text" class="form-control" placeholder=""> 
+                                <input id="guest-org" type="text" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="default" class="control-label col-md-3">VIP</label>
                             <div class="col-md-8">
-                                <input id="default" type="text" class="form-control" placeholder=""> 
+                                <input id="guest-vip" type="text" class="form-control" placeholder="">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn grey-salsa btn-outline" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                    <button class="btn green btn-primary" type="submit">Add Event</button>
+                    <button id="submit-guest" class="btn green btn-primary" type="submit">Add Guest</button>
                 </div>
                 </form>
             </div>
@@ -163,7 +164,7 @@
                 <form action="/guestlist">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" style="font-weight: bold;color: #3e3e3e;">Do you wanna add bulk guests from Excel?</h4>
+                    <h4 class="modal-title" style="font-weight: bold;color: #3e3e3e;">Bulk add guests from Excel</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
@@ -232,7 +233,7 @@
                                     <div class="caption">
                                         <i class="icon-social-dribbble font-green"></i>
                                         {{!-- Event Name Input--}}
-                                        <span class="caption-subject font-green bold uppercase">Event1</span>
+                                        <span class="caption-subject font-green bold uppercase">{{EventId}}</span>
                                     </div>
                                     <div class="actions">
                                         {{!-- Event Type Input--}}
@@ -284,7 +285,7 @@
                                                     </address>
                                                 </div>
                                                 <small>
-                                            <cite title="Source Title">Adress</cite>
+                                            <cite title="Source Title">Address</cite>
                                         </small>
                                     </blockquote>
                                 </div>
@@ -354,7 +355,7 @@
                         <div class="portlet-title">
                             <div class="caption font-dark">
                                 <i class="icon-settings font-dark"></i>
-                                <span class="caption-subject bold uppercase"> Guest List</span>
+                                <span class="caption-subject bold uppercase">Guest List</span>
                             </div>
                                 
                             <div class="actions">
@@ -371,7 +372,7 @@
                                                 </li>
                                                 <li>
                                                     <a data-toggle="modal" href="#form_modal2">
-                                                        <i class="fa fa-file-excel-o"></i> Input Guests From Excel</a>
+                                                        <i class="fa fa-file-excel-o"></i> Import Guests From Excel</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -393,35 +394,54 @@
                                         <th> First Name </th>
                                         <th> Last Name </th>
                                         <th> Email </th>
-                                        <th> Org Guests' </th>
+                                        <th> Guest's Organization </th>
                                         <th> VIP </th>
-                                        <th> Check In </th>
-                                        <th> Option</th>
+                                        <th> CheckIn </th>
+                                        <th> Option </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{!-- HANDLEBARS EACH --}}
+                                    {{!-- HANDLEBARS EACH --}}
+                                    {{#each guests}}
                                     <tr class="odd gradeX">
+                                    
+                                        {{!-- checkmark box (with ID) --}}
                                         <td>
-                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <label data-id={{id}} class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                 <input type="checkbox" class="checkboxes" value="1" />
                                                 <span></span>
                                             </label>
                                         </td>
-                                        <td> Shuxer </td>
-                                        <td> Jack </td>
-                                        <td>
-                                            <a href="mailto:shuxer@gmail.com"> shuxer@gmail.com </a>
+                                        {{!-- first_name --}}
+                                        <td data-id={{id}}> {{first_name}} </td>
+                                    
+                                        {{!-- last_name --}}
+                                        <td data-id={{id}}> {{last_name}} </td>
+                                    
+                                        {{!-- email --}}
+                                        <td data-id={{id}}> {{email}} </td>
+                                    
+                                        {{!-- organization --}}
+                                        <td data-id={{id}} class="center">
+                                            {{organization}}
                                         </td>
-                                        <td class="center"> Org1 </td>
-                                        <td></td>
+                                    
+                                        {{!-- vip --}}
+                                        <td data-id={{id}}>
+                                            {{vip}}
+                                        </td>
+                                    
+                                        {{!-- check in toggle ON/OFF --}}
                                         <td>
                                             <div class="btn-group" style="position:relative;">
-                                                    <input type="checkbox" checked class="make-switch" id="test" data-size="mini">
+                                                <input type="checkbox" checked class="make-switch" data-id={{id}} data-size="mini">
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="pb-5">
                                             <div class="btn-group" style="position:relative;">
-                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    Actions
                                                     <i class="fa fa-angle-down"></i>
                                                 </button>
                                                 <ul class="dropdown-menu pull-left" role="menu">
@@ -437,8 +457,8 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    {{/each}}
                                 </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -489,5 +509,8 @@
             })
         </script>
     </body>
+
+    {{!-- LINK TO GUESTS FILE --}}
+    <script src="/js/guests.js"></script>
 
 </html>
