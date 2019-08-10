@@ -2,15 +2,15 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  app.get("/api/guestlist/:eventid", function(req, res) {
-    db.Guests.findAll({
-      where: {
-        EventId: req.params.eventid
-      }
-    }).then(function(dbGuest) {
-      res.json(dbGuest);
-    });
-  });
+  // app.get("/api/guestlist/:eventid", function(req, res) {
+  //   db.Guests.findAll({
+  //     where: {
+  //       EventId: req.params.eventid
+  //     }
+  //   }).then(function(dbGuest) {
+  //     res.json(dbGuest);
+  //   });
+  // });
 
   // working on this one
   app.post("/guestlist/api/guests/add", function(req, res) {
