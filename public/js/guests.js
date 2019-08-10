@@ -99,7 +99,7 @@ var handleFormSubmit = function(guest) {
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
-    // refreshGuests();
+    refreshGuests();
   });
 
   $guestFirstName.val("");

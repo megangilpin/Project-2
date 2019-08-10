@@ -98,7 +98,8 @@ module.exports = function(app) {
   });
 
   //   MAILGUN PROCESS -----------------------
-  //   See the sendmail.js file
+  //   See the sendmail-apiRoutes.js file
+  //   ---------------------------------------
 
   // Delete a guest by id
   app.delete("/api/guests/:id", function(req, res) {
