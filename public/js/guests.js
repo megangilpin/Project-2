@@ -46,13 +46,13 @@ var API = {
   sendCheckInEmail: function(id) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/emailcheckin" + id
+      url: "/api/guest/emailcheckin/" + id
     });
   },
-  sendInviteEmail: function(email) {
+  sendInviteEmail: function(email, event) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/invite/" + email
+      url: "/api/guest/invite/" + email + "/" + event
     });
   },
   checkInGuest: function(id) {
@@ -95,11 +95,11 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  handleSendEmail(guest.email);
+  API.sendInviteEmail(guest.email, guest.EventId);
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
-    refreshGuests();
+    // refreshGuests();
   });
 
   $guestFirstName.val("");
@@ -122,17 +122,18 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-// pass an array to this function
-var handleSendEmail = function(data) {
-  console.log("running handleSendEmail function -------");
+// // pass an array to this function
+// var handleSendEmail = function(email, event) {
+//   console.log("running handleSendEmail function -------");
 
-  // API.sendInviteEmail(data);
-};
+//   API.sendInviteEmail(email, event);
+// };
 
 var handleCheckIn = function() {
   $("#toggle-demo").bootstrapToggle("on");
   var guestId = $(this).attr("data-id");
   API.checkInGuest(guestId);
+  API.sendCheckInEmail(guestId);
 };
 
 var handleUnCheckIn = function() {
