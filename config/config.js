@@ -22,6 +22,7 @@ module.exports = {
     dialect: "mysql",
     database: process.env.DB,
     host: process.env.HOST,
+    post: "3306",
     username: process.env.DBUSER,
     password: process.env.DBPW
   }
