@@ -43,6 +43,19 @@ module.exports = function(app) {
     });
   });
 
+  // This is currently what /guestlist shows. Will need to look more like /event/:id when connected to backend.
+  app.get("/event/:id", function(req, res) {
+    db.Events.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
+      res.render("event", {
+        event: result
+      });
+    });
+  });
+
   app.get("/register", function(req, res) {
     res.render("register", {
       layout: "view"

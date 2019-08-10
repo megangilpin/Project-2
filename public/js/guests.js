@@ -7,7 +7,22 @@ var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
-var $guestEventId = "1";
+var $checkInBtn = $(".checkin");
+var $guestEventId = spliceUrl();
+
+function spliceUrl() {
+  // var url = window.location.href;
+  // url = new URL(url);
+  // url.search;
+  // console.log(url);
+
+  let params = (new URL(document.location)).searchParams;
+  let id = parseInt(params.get('id')); // is the number 18
+  console.log(id);
+  return id;
+}
+
+console.log($guestEventId);
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -15,7 +30,7 @@ var API = {
     console.log(guest);
     return $.ajax({
       type: "POST",
-      url: "guestlist/api/guests/add",
+      url: "api/guests/add",
       data: guest
     });
   },
@@ -34,7 +49,7 @@ var API = {
   sendCheckInEmail: function(id) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/checkin/" + id
+      url: "/api/guest/emailcheckin" + id
     });
   },
   sendInviteEmail: function(email) {
@@ -42,12 +57,25 @@ var API = {
       type: "GET",
       url: "/api/guest/invite/" + email
     });
+  },
+  checkInGuest: function(id) {
+    return $.ajax({
+      type: "POST",
+      url: "/api/guest/checkin/" + id
+    });
+  },
+  unCheckInGuest: function(id) {
+    return $.ajax({
+      type: "POST",
+      url: "/api/guest/uncheckin/" + id
+    });
   }
 };
 
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
+    console.log(data);
     location.reload();
   });
 };
@@ -55,7 +83,6 @@ var refreshGuests = function() {
 // handleFormSubmit is called whenever we submit a new guest
 // Save the new guest to the db and refresh the list
 var handleFormSubmit = function(guest) {
-  console.log("SUBMIT BUTTON CLICKED");
   guest.preventDefault();
 
   var guest = {
@@ -64,13 +91,10 @@ var handleFormSubmit = function(guest) {
     email: $guestEmail.val().trim(),
     org: $guestOrg.val().trim(),
     vip: $guestVIP.val().trim(),
+    checked_in: false,
     EventId: $guestEventId
   };
 
-  if (!guest.email) {
-    alert("You must enter an email address");
-    return;
-  }
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
@@ -108,6 +132,19 @@ var handleSendEmail = function(data) {
   // API.sendInviteEmail(data);
 };
 
+var handleCheckIn = function() {
+  $("#toggle-demo").bootstrapToggle("on");
+  var guestId = $(this).attr("data-id");
+  API.checkInGuest(guestId);
+};
+
+var handleUnCheckIn = function() {
+  $("#toggle-demo").bootstrapToggle("off");
+  var guestId = $(this).attr("data-id");
+  API.unCheckInGuest(guestId);
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $guestList.on("click", ".delete", handleDeleteBtnClick);
+$checkInBtn.on("click", handleCheckIn);

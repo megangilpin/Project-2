@@ -1,22 +1,16 @@
 // fill this in with the route to access the guests names for events
 var db = require("../models");
-var holdEventId = "";
 
 module.exports = function(app) {
-  // app.get("/api/guestlist/:eventid", function(req, res) {
-  //   holdEventId = req.params.eventid;
-  //   console.log("req.params.eventid:");
-  //   console.log(req.params.eventid);
-  //   db.Guests.findAll({
-  //     where: {
-  //       EventId: req.params.eventid
-  //     }
-  //   }).then(function(dbGuest) {
-  //     console.log(dbGuest);
-  //     console.log(holdEventId);
-  //     res.json(dbGuest);
-  //   });
-  // });
+  app.get("/api/guestlist/:eventid", function(req, res) {
+    db.Guests.findAll({
+      where: {
+        EventId: req.params.eventid
+      }
+    }).then(function(dbGuest) {
+      res.json(dbGuest);
+    });
+  });
 
   // working on this one
   app.post("/guestlist/api/guests/add", function(req, res) {
@@ -27,7 +21,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    var EventId = holdEventId;
+    var EventId = 1;
 
     console.log(req.body);
 
@@ -37,15 +31,13 @@ module.exports = function(app) {
       email: email,
       organization: org,
       vip: vip,
-      EventId: holdEventId
+      EventId: EventId
     }).then(function(dbGuest) {
-      console.log(dbGuest);
       res.json(dbGuest);
     });
   });
 
   app.put("/api/guests", function(req, res) {
-    console.log(req);
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
     var email = req.body.email;
@@ -59,8 +51,8 @@ module.exports = function(app) {
         first_name: firstName,
         last_name: lastName,
         email: email,
-        organization: org
-        // vip: vip
+        organization: org,
+        vip: vip
       },
       {
         wjere: {
@@ -72,10 +64,9 @@ module.exports = function(app) {
     });
   });
 
-  //   CHECK IN PROCESS ----------------------- href="/api/guests/checkin/:id"
-  app.put("/api/guests/checkin/:id", function(req, res) {
-    console.log(req);
-    console.log("in the checkin api");
+  // GUEST CHECK IN PROCESS
+  // check in
+  app.post("/api/guest/checkin/:id", function(req, res) {
     db.Guests.update(
       {
         checked_in: true
@@ -86,7 +77,22 @@ module.exports = function(app) {
         }
       }
     ).then(function(dbGuest) {
-      alert("successful checkin");
+      res.json(dbGuest);
+    });
+  });
+
+  // uncheck in
+  app.post("/api/guest/uncheckin/:id", function(req, res) {
+    db.Guests.update(
+      {
+        checked_in: 0
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbGuest) {
       res.json(dbGuest);
     });
   });
