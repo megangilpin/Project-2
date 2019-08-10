@@ -43,13 +43,13 @@ require("./routes/sendmail-apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 // have set this to TRUE so that the Sequelize will run during development (need to change back to FALSE later)
-var syncOptions = { force: false };
+// var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
+// if (process.env.NODE_ENV === "test") {
+//   syncOptions.force = true;
+// }
 
 // ADDED BY EMILY PER JORDANS RECOMMENDATION
 if (process.env.NODE_ENV === "production") {
@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
+db.sequelize.sync({ force: process.env.forceDBSync }).then(function() {
   app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
