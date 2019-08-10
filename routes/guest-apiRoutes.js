@@ -3,20 +3,20 @@ var db = require("../models");
 var holdEventId = "";
 
 module.exports = function(app) {
-  app.get("/api/guestlist/:eventid", function(req, res) {
-    holdEventId = req.params.eventid;
-    console.log("req.params.eventid:");
-    console.log(req.params.eventid);
-    db.Guests.findAll({
-      where: {
-        EventId: req.params.eventid
-      }
-    }).then(function(dbGuest) {
-      console.log(dbGuest);
-      console.log(holdEventId);
-      res.json(dbGuest);
-    });
-  });
+  // app.get("/api/guestlist/:eventid", function(req, res) {
+  //   holdEventId = req.params.eventid;
+  //   console.log("req.params.eventid:");
+  //   console.log(req.params.eventid);
+  //   db.Guests.findAll({
+  //     where: {
+  //       EventId: req.params.eventid
+  //     }
+  //   }).then(function(dbGuest) {
+  //     console.log(dbGuest);
+  //     console.log(holdEventId);
+  //     res.json(dbGuest);
+  //   });
+  // });
 
   // working on this one
   app.post("/guestlist/api/guests/add", function(req, res) {

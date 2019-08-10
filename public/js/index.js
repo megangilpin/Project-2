@@ -160,7 +160,6 @@ var addNewUserSubmit = function() {
     password: $newUserPass.val().trim()
   };
   var confirmPassword = $reNewUserPass.val().trim();
-  console.log(user);
 
   if (user.password !== confirmPassword) {
     alert("Your passwords don't match, please try again");
@@ -168,18 +167,14 @@ var addNewUserSubmit = function() {
   }
 
   API.addUser(user).then(function(result) {
-    // if (result.errors[0].message === "Validation isEmail on email failed") {
-    //   alert("Please enter a valid email address");
-    // } else {
-    $newUserFirstName.val("");
-    $newUserLastName.val("");
-    $companyName.val("");
-    $newUserEmail.val("");
-    $newUserUName.val("");
-    $newUserPhoto.val("");
-    $newUserPass.val("");
-    $reNewUserPass.val("");
-    // }
+    console.log(result.id)
+    window.location.href = "/events/:" + result.id;
+    if (result.errors[0].message === "Validation isEmail on email failed") {
+      alert("Please enter a valid email address");
+    } else {
+      console.log(result.id)
+      window.location.href = "/events/:" + result.id;
+    }
   });
 };
 
