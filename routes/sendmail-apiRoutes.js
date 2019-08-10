@@ -1,7 +1,7 @@
 require("dotenv").config();
-var express = require("express");
+// var express = require("express");
 var Mailgun = require("mailgun-js");
-var app = express();
+// var app = express();
 
 var db = require("../models");
 
@@ -11,7 +11,6 @@ module.exports = function(app) {
   var from_who = process.env.EMAIL;
 
   // CHECKIN
-  // button click will send the invitation email (wrap in a function)
   app.get("/api/guest/emailcheckin/:id", function(req, res) {
     console.log("started the mail for check in process");
     db.Guests.findOne({
