@@ -6,8 +6,8 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  // Needs to be deleted after events gets linked back end
-  app.get("/events", function(req, res) {
+  // // Needs to be deleted after events gets linked back end
+  app.get("/events/:id", function(req, res) {
     db.Events.findAll({}).then(function(result) {
       res.render("events", {
         layout: "view",
@@ -15,6 +15,20 @@ module.exports = function(app) {
       });
     });
   });
+
+  // This will work once the user and events are associated
+  // app.get("/events/:id", function(req, res) {
+  //   db.Events.findOne({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(result) {
+  //     res.render("events", {
+  //       layout: "view",
+  //       event: result
+  //     });
+  //   });
+  // });
 
   app.get("/guestlist/:eventid", function(req, res) {
     db.Guests.findAll({
