@@ -21,7 +21,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    var EventId = 1;
+    var EventId = req.body.EventId;
 
     console.log(req.body);
 

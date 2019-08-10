@@ -9,17 +9,14 @@ var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
 var $checkInBtn = $(".checkin");
 var $guestEventId = spliceUrl();
-
+// spliceUrl()
 function spliceUrl() {
-  // var url = window.location.href;
-  // url = new URL(url);
-  // url.search;
-  // console.log(url);
-
-  let params = (new URL(document.location)).searchParams;
-  let id = parseInt(params.get('id')); // is the number 18
-  console.log(id);
-  return id;
+  var url = window.location.href;
+  url = new URL(url);
+  var urlPathname = url.pathname;
+  var urlSplit = urlPathname.split("/");
+  var EventId = urlSplit[2];
+  return EventId;
 }
 
 console.log($guestEventId);
