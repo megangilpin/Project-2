@@ -1,6 +1,5 @@
 {
   "development": {
-  "use_env_variable": "db_url",
   "dialect": "mysql"
   },
   "test": {

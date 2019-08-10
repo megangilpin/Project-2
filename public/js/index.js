@@ -42,19 +42,19 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/events",
+      url: "/api/events",
       data: JSON.stringify(event)
     });
   },
   getEvent: function() {
     return $.ajax({
-      url: "api/events",
+      url: "/api/events",
       type: "GET"
     });
   },
   deleteEvent: function(id) {
     return $.ajax({
-      url: "api/events/" + id,
+      url: "/api/events/" + id,
       type: "DELETE"
     });
   },
@@ -64,7 +64,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/user",
+      url: "/api/user",
       data: JSON.stringify(user)
     });
   },
@@ -74,7 +74,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/user/login",
+      url: "/api/user/login",
       data: JSON.stringify(user)
     });
   }
@@ -185,7 +185,7 @@ var adminLogin = function() {
     password: $userPass.val().trim()
   };
   API.userLogin(user).then(result => {
-    window.location.href = "/events/1";
+    window.location.href = "/events";
   });
 };
 // Add event listeners to the submit and delete buttons
