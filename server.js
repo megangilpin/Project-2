@@ -51,6 +51,11 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
+// ADDED BY EMILY PER JORDANS RECOMMENDATION
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
