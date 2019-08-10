@@ -95,10 +95,6 @@ var handleFormSubmit = function(guest) {
     EventId: $guestEventId
   };
 
-  // if (!guest.email) {
-  //   alert("You must enter an email address");
-  //   return;
-  // }
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL

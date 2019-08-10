@@ -8,8 +8,6 @@ module.exports = function(app) {
         EventId: req.params.eventid
       }
     }).then(function(dbGuest) {
-      console.log(dbGuest);
-      console.log(holdEventId);
       res.json(dbGuest);
     });
   });
@@ -35,13 +33,11 @@ module.exports = function(app) {
       vip: vip,
       EventId: EventId
     }).then(function(dbGuest) {
-      console.log(dbGuest);
       res.json(dbGuest);
     });
   });
 
   app.put("/api/guests", function(req, res) {
-    console.log(req);
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
     var email = req.body.email;
@@ -68,7 +64,7 @@ module.exports = function(app) {
     });
   });
 
-  //   GUEST CHECK IN PROCESS
+  // GUEST CHECK IN PROCESS
   // check in
   app.post("/api/guest/checkin/:id", function(req, res) {
     db.Guests.update(
@@ -84,6 +80,7 @@ module.exports = function(app) {
       res.json(dbGuest);
     });
   });
+
   // uncheck in
   app.post("/api/guest/uncheckin/:id", function(req, res) {
     db.Guests.update(
