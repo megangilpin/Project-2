@@ -9,7 +9,7 @@ var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
 var $checkInBtn = $(".checkin");
 var $guestEventId = spliceUrl();
-// spliceUrl()
+
 function spliceUrl() {
   var url = window.location.href;
   url = new URL(url);
