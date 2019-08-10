@@ -1,6 +1,6 @@
 # Project-2
 
-## Hosted on Heroku: https://meey-project2.herokuapp.com or https://guestlisterapp.com
+## Hosted on Heroku: https://meey-project2.herokuapp.com or http://guestlisterapp.com
 
 ## GuestLister
 
