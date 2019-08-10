@@ -114,7 +114,7 @@ module.exports = function(app) {
         to: req.params.mail,
         subject: "Today is the best day because...",
         html:
-          "<h1>You're invited!</h1>" +
+          "<h1>You're scored yourself an invite!</h1>" +
           "<h3>Join us for " +
           eventObj.name +
           "</h3>" +

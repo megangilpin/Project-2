@@ -434,17 +434,21 @@
                                         </td>
                                     
                                         {{!-- check in toggle ON/OFF --}}
-                                        {{!-- <td class="toggle-checkin" data-id={{id}}>
-                                            <input class="toggle-checkin" id="toggle-checkin" data-id={{id}} type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success"
-                                            data-offstyle="info">
-                                            <div class="toggle-checkin" id="console-event"></div>
-                                        </td> --}}
-
+                                        
+                                        {{#if checked_in}}
                                         <td class="checkin" data-id={{id}}>
-                                            <input id="toggle-event" class="checkin" data-id={{id}} type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success"
-                                                data-offstyle="info">
+                                            <input id="toggle-event" class="checkin" data-checkin={{checked_in}} data-id={{id}} type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success"
+                                                data-offstyle="info" checked>
                                             <div class="checkin" id="console-event" data-id={{id}}></div>
                                         </td>
+                                        {{else}}
+                                        <td class="checkin" data-id={{id}}>
+                                            <input id="toggle-event" class="checkin" data-checkin={{checked_in}} data-id={{id}} type="checkbox"
+                                                data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="info">
+                                            <div class="checkin" id="console-event" data-id={{id}}></div>
+                                        </td>
+                                        {{/if}}
+                        
 
                                         {{!-- ... --}}
                                         <td class="pb-5">
@@ -508,7 +512,7 @@
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-        
+
 
         <script>
             $(document).ready(function()
@@ -519,6 +523,7 @@
                 });
             })
         </script>
+
     </body>
     
     {{!-- LINK TO GUESTS FILE --}}
