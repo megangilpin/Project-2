@@ -1,12 +1,8 @@
 // fill this in with the route to access the guests names for events
 var db = require("../models");
-var holdEventId = "";
 
 module.exports = function(app) {
   app.get("/api/guestlist/:eventid", function(req, res) {
-    holdEventId = req.params.eventid;
-    console.log("req.params.eventid:");
-    console.log(req.params.eventid);
     db.Guests.findAll({
       where: {
         EventId: req.params.eventid
@@ -27,7 +23,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    EventId = holdEventId;
+    var EventId = 1;
 
     console.log(req.body);
 
@@ -37,7 +33,7 @@ module.exports = function(app) {
       email: email,
       organization: org,
       vip: vip,
-      EventId: holdEventId
+      EventId: EventId
     }).then(function(dbGuest) {
       console.log(dbGuest);
       res.json(dbGuest);
@@ -92,7 +88,7 @@ module.exports = function(app) {
   app.post("/api/guest/uncheckin/:id", function(req, res) {
     db.Guests.update(
       {
-        checked_in: false
+        checked_in: 0
       },
       {
         where: {

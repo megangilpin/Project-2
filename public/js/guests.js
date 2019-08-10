@@ -7,8 +7,22 @@ var $guestVIP = $("#guest-vip");
 var $submitBtn = $("#submit-guest");
 var $guestList = $("#guest-list");
 var $emailArrayCreated = $("#get-guest-emails");
-// var $guestEventId = "1";
-var $checkInBtn = $(".toggle-checkin");
+var $checkInBtn = $(".checkin");
+var $guestEventId = spliceUrl();
+
+function spliceUrl() {
+  // var url = window.location.href;
+  // url = new URL(url);
+  // url.search;
+  // console.log(url);
+
+  let params = (new URL(document.location)).searchParams;
+  let id = parseInt(params.get('id')); // is the number 18
+  console.log(id);
+  return id;
+}
+
+console.log($guestEventId);
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -16,7 +30,7 @@ var API = {
     console.log(guest);
     return $.ajax({
       type: "POST",
-      url: "guestlist/api/guests/add",
+      url: "api/guests/add",
       data: guest
     });
   },
@@ -61,6 +75,7 @@ var API = {
 // UPDATE ONCE YINGYING ADDS IDS TO THE EVENT/GUESTS HANDLEBARS PAGE
 var refreshGuests = function() {
   API.getGuest().then(function(data) {
+    console.log(data);
     location.reload();
   });
 };
@@ -76,6 +91,7 @@ var handleFormSubmit = function(guest) {
     email: $guestEmail.val().trim(),
     org: $guestOrg.val().trim(),
     vip: $guestVIP.val().trim(),
+    checked_in: false,
     EventId: $guestEventId
   };
 
