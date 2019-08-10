@@ -85,7 +85,7 @@ module.exports = function(app) {
   app.post("/api/guest/uncheckin/:id", function(req, res) {
     db.Guests.update(
       {
-        checked_in: 0
+        checked_in: false
       },
       {
         where: {
