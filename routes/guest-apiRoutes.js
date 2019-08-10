@@ -21,7 +21,7 @@ module.exports = function(app) {
     var email = req.body.email;
     var org = req.body.org;
     var vip = req.body.vip;
-    var EventId = 1;
+    var EventId = req.body.EventId;
 
     console.log(req.body);
 
@@ -85,7 +85,7 @@ module.exports = function(app) {
   app.post("/api/guest/uncheckin/:id", function(req, res) {
     db.Guests.update(
       {
-        checked_in: 0
+        checked_in: false
       },
       {
         where: {
@@ -98,7 +98,8 @@ module.exports = function(app) {
   });
 
   //   MAILGUN PROCESS -----------------------
-  //   See the sendmail.js file
+  //   See the sendmail-apiRoutes.js file
+  //   ---------------------------------------
 
   // Delete a guest by id
   app.delete("/api/guests/:id", function(req, res) {

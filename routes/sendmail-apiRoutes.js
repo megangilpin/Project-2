@@ -1,130 +1,163 @@
 require("dotenv").config();
-var express = require("express");
+// var express = require("express");
 var Mailgun = require("mailgun-js");
-var app = express();
+// var app = express();
 
 var db = require("../models");
 
 module.exports = function(app) {
-  console.log("++++++++++++++++++++++++++++++++++ mailgun");
-
   var api_key = process.env.API_ID;
   var domain = process.env.DOMAIN;
   var from_who = process.env.EMAIL;
 
   // CHECKIN
-  // button click will send the invitation email (wrap in a function)
-  app.get("/api/guest/checkin/:id", function(req, res) {
+  app.get("/api/guest/emailcheckin/:id", function(req, res) {
+    console.log("started the mail for check in process");
     db.Guests.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function(result) {
-      var checkinObj = {
-        // eventID: result.EventId,
-        firsName: result.first_name,
-        email: result.email
-      };
-      return checkinObj.get();
-    });
-
-    var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
-    // var question1 = "question1";
-    // var question2 = "question2";
-    // var question3 = "question3";
-
-    var data = {
-      from: from_who,
-      to: checkinObj.email,
-      subject: "You've been checked in!",
-      html:
-        "<H1>Welcome to the" +
-        eventName +
-        ", " +
-        checkinObj.firstName +
-        "!</h1>" +
-        "<p>We are so glad you are here with us</p>" +
-        "<p>Get started with:</p>" +
-        "<ol>" +
-        "<li>" +
-        question1 +
-        "</li>" +
-        "<li>" +
-        question2 +
-        "</li>" +
-        "<li>" +
-        question3 +
-        "</li>" +
-        "</ol>" +
-        "<p>If you have any questions alon the way, let us know</p>" +
-        "<p>Enjoy!</p>"
-    };
-
-    //Invokes the method to send emails given the above data with the helper library
-    mailgun.messages().send(data, function(err, body) {
-      //If there is an error, render the error page
-      if (err) {
-        res.render("error", { error: err });
-        console.log("got an error: ", err);
-      }
-      //Else we can greet and leave
-      else {
-        console.log("sending mailgun messgae");
-        // this is where the page will be updated with an email being sent
-        // res.render("handlebarspage....", { status: "invite sent" });
-        console.log(body);
-      }
+    }).then(function(gus) {
+      var first_name = gus.first_name;
+      var email = gus.email;
+      var thisEvent = gus.EventId;
+      mailGunCheckIn(thisEvent, first_name, email);
     });
   });
 
+  function mailGunCheckIn(event, guestName, guestEmail) {
+    db.Events.findOne({
+      where: {
+        id: event
+      }
+    }).then(function(eve) {
+      var checkInObj = {
+        guestName: guestName,
+        eventName: eve.name,
+        question1: eve.question1,
+        question2: eve.question2,
+        question3: eve.question3,
+        email: guestEmail
+      };
+
+      var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
+
+      var data = {
+        from: from_who,
+        to: checkInObj.email,
+        subject: "You've been checked in, " + checkInObj.guestName + "!",
+        html:
+          "<H1>Welcome to " +
+          checkInObj.eventName +
+          ", " +
+          checkInObj.guestName +
+          "!</h1>" +
+          "<h3>We are so glad you are here with us</h3>" +
+          "<p>The organizer has put together a few quesitons for you to get started at this event. Here they are:</p>" +
+          "<ol>" +
+          "<li>" +
+          checkInObj.question1 +
+          "</li>" +
+          "<li>" +
+          checkInObj.question2 +
+          "</li>" +
+          "<li>" +
+          checkInObj.question3 +
+          "</li>" +
+          "</ol>" +
+          "<p>If you have any questions along the way, ask the people who checked your in.</p>" +
+          "<p>Enjoy!</p>" +
+          "<br>" +
+          "<br>" +
+          "<p><3 your friends at GuestLister</p>"
+      };
+
+      //Invokes the method to send emails given the above data with the helper library
+      mailgun.messages().send(data, function(err, body) {
+        //If there is an error, render the error page
+        if (err) {
+          res.render("error", { error: err });
+          console.log("got an error: ", err);
+        }
+        //Else we can greet and leave
+        else {
+          console.log("sending mailgun messgae");
+          console.log(body);
+        }
+      });
+    });
+  }
+
   // INVITATION
-  app.get("/api/guest/invite/:mail", function(req, res) {
+  app.get("/api/guest/invite/:mail/:event", function(req, res) {
+    console.log("SENDING INVITE");
     var mailgun = new Mailgun({ apiKey: api_key, domain: domain });
-
-    var eventName = "Event";
-    var location = "";
-    var startTime = "";
-    var endTime = "";
-    var date = "";
-
-    var data = {
-      from: from_who,
-      to: req.params.mail,
-      subject: "You're invited!",
-      html:
-        "<H1>You're invited!</h1>" +
-        "<p>Join us for the: " +
-        eventName +
-        "<p>Details: </p>" +
-        "<ul>" +
-        "<li>Date: " +
-        date +
-        "</li>" +
-        "<li>Location: " +
-        location +
-        "</li>" +
-        "<li>From: " +
-        startTime +
-        " to " +
-        endTime +
-        "</li>" +
-        "<ul>" +
-        "<p>See you there!</p>"
-    };
-
-    mailgun.messages().send(data, function(err, body) {
-      //If there is an error, render the error page
-      if (err) {
-        res.render("error", { error: err });
-        console.log("got an error: ", err);
+    db.Events.findOne({
+      where: {
+        id: req.params.event
       }
-      //Else we can greet and leave
-      else {
-        console.log("sending mailgun messgae");
-        // this is where the page will be updated with an email being sent
-        // res.render("handlebarspage....", { status: "invite sent" });
-        console.log(body);
-      }
+    }).then(function(eve) {
+      var eventObj = {
+        name: eve.name,
+        description: eve.description,
+        start_time: eve.start_time,
+        end_time: eve.end_time,
+        date: eve.date,
+        address_line: eve.address_line,
+        city: eve.city,
+        state: eve.state,
+        zipcode: eve.zipcode
+      };
+
+      var data = {
+        from: from_who,
+        to: req.params.mail,
+        subject: "Today is the best day because...",
+        html:
+          "<h1>You're scored yourself an invite!</h1>" +
+          "<h3>Join us for " +
+          eventObj.name +
+          "</h3>" +
+          "<p><strong>Details: </strong></p>" +
+          "<ul>" +
+          "<li><strong>Date: </strong>" +
+          eventObj.date +
+          "</li>" +
+          "<li><strong>Location: </strong>" +
+          eventObj.address_line +
+          " " +
+          eventObj.city +
+          ", " +
+          eventObj.state +
+          " " +
+          eventObj.zipcode +
+          "</li>" +
+          "<li><strong>From: </strong>" +
+          eventObj.start_time +
+          " to " +
+          eventObj.end_time +
+          "</li>" +
+          "<ul>" +
+          "<h3>See you there!</h3>" +
+          "<br>" +
+          "<br>" +
+          "<p><3 your friends at GuestLister</p>"
+      };
+
+      mailgun.messages().send(data, function(err, body) {
+        //If there is an error, render the error page
+        if (err) {
+          res.render("error", { error: err });
+          console.log("got an error: ", err);
+        }
+        //Else we can greet and leave
+        else {
+          console.log("sending mailgun messgae");
+          // this is where the page will be updated with an email being sent
+          // res.render("handlebarspage....", { status: "invite sent" });
+          console.log(body);
+        }
+      });
     });
   });
 }; // end of export

@@ -11,15 +11,12 @@ var $checkInBtn = $(".checkin");
 var $guestEventId = spliceUrl();
 
 function spliceUrl() {
-  // var url = window.location.href;
-  // url = new URL(url);
-  // url.search;
-  // console.log(url);
-
-  let params = (new URL(document.location)).searchParams;
-  let id = parseInt(params.get('id')); // is the number 18
-  console.log(id);
-  return id;
+  var url = window.location.href;
+  url = new URL(url);
+  var urlPathname = url.pathname;
+  var urlSplit = urlPathname.split("/");
+  var EventId = urlSplit[2];
+  return EventId;
 }
 
 console.log($guestEventId);
@@ -49,13 +46,13 @@ var API = {
   sendCheckInEmail: function(id) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/emailcheckin" + id
+      url: "/api/guest/emailcheckin/" + id
     });
   },
-  sendInviteEmail: function(email) {
+  sendInviteEmail: function(email, event) {
     return $.ajax({
       type: "GET",
-      url: "/api/guest/invite/" + email
+      url: "/api/guest/invite/" + email + "/" + event
     });
   },
   checkInGuest: function(id) {
@@ -98,7 +95,7 @@ var handleFormSubmit = function(guest) {
   console.log(JSON.stringify(guest, null, 2));
 
   // TRIGGERs MAILGUN TO SEND EMAIL
-  handleSendEmail(guest.email);
+  API.sendInviteEmail(guest.email, guest.EventId);
   // --------------------------------
   API.saveGuest(guest).then(function() {
     console.log("guest added");
@@ -125,17 +122,18 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-// pass an array to this function
-var handleSendEmail = function(data) {
-  console.log("running handleSendEmail function -------");
+// // pass an array to this function
+// var handleSendEmail = function(email, event) {
+//   console.log("running handleSendEmail function -------");
 
-  // API.sendInviteEmail(data);
-};
+//   API.sendInviteEmail(email, event);
+// };
 
 var handleCheckIn = function() {
   $("#toggle-demo").bootstrapToggle("on");
   var guestId = $(this).attr("data-id");
   API.checkInGuest(guestId);
+  API.sendCheckInEmail(guestId);
 };
 
 var handleUnCheckIn = function() {
