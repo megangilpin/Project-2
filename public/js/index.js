@@ -190,7 +190,7 @@ var adminLogin = function() {
     password: $userPass.val().trim()
   };
   API.userLogin(user).then(result => {
-    window.location.href = "/events";
+    window.location.href = "/events/1";
   });
 };
 // Add event listeners to the submit and delete buttons

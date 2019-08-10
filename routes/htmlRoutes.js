@@ -7,7 +7,7 @@ module.exports = function(app) {
   });
 
   // Needs to be deleted after events gets linked back end
-  app.get("/events", function(req, res) {
+  app.get("/events/1", function(req, res) {
     db.Events.findAll({}).then(function(result) {
       res.render("events", {
         layout: "view",
