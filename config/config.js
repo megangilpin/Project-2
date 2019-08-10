@@ -22,7 +22,7 @@ module.exports = {
     dialect: "mysql",
     host: "localhost",
     port: "3306",
-    database: JAWSDB_URL,
+    database: "JAWSDB_URL",
     username: process.env.DBUSER,
     password: process.env.DBPW
   }
