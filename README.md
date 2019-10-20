@@ -4,7 +4,7 @@
 
 ## Hosted on Heroku: https://meey-project2.herokuapp.com or http://guestlisterapp.com
 
-### Overview
+## Overview
 
 Have you ever wanted a simple way to plan an event, check people in, and automatically send notifications, even when they've arrived? Well, now you have GuestLister!
 
@@ -26,7 +26,7 @@ Upon check-in, members can know where they need to go, or to get to know each ot
   * Node.js
   * Mocha and Chai for testing
 
-### There are four contributors to this project
+## There are four contributors to this project
 * **Elyza Bleau** - web developer - [Elyza Bleau](https://github.com/bleauwonder)
 * **Emily Baumgartner** - web developer [Emily Baumgartner](https://github.com/emilybaum)
 * **Megan Gilpin** - web developer - [Megan Gilpin](https://github.com/megangilpin)
