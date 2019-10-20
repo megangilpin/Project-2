@@ -1,6 +1,6 @@
 # GuestLister :calendar:
 
-![GuestLister Demo](demo/guestLister.gif)
+![GuestLister Demo](demo/guestListermed.gif)
 
 ## Hosted on Heroku: https://meey-project2.herokuapp.com or http://guestlisterapp.com
 
@@ -28,6 +28,6 @@ Have you ever wanted a simple way to plan an event, check people in, and automat
 
 ### There are four contributors to this project
 * **Elyza Bleau** - web developer - [Elyza Bleau](https://github.com/bleauwonder)
-* **Megan Gilpin** - web developer - [Megan Gilpin](https://github.com/megangilpin)
 * **Emily Baumgartner** - web developer [Emily Baumgartner](https://github.com/emilybaum)
+* **Megan Gilpin** - web developer - [Megan Gilpin](https://github.com/megangilpin)
 * **Yingying Ye** - web developer [Yingying Ye](https://github.com/yeyingying)
