@@ -8,13 +8,13 @@
 
 Have you ever wanted a simple way to plan an event, check people in, and automatically send notifications, even when they've arrived? Well, now you have GuestLister!
 
+Upon check-in, members can know where they need to go, or to get to know each other better!
+
+
 ## This application allows you to:
   * create events
   * track attendance
   * allow updates/notifications to members attending the group
-
-## Upon check-in, members can know where they need to go, or to get to know each other better!
-
 
 ## Technology Used
   * HTML and Bootstrap
